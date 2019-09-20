@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="40dp"
+    android:layout_height="40dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_margin="5dp">
+
+
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/report_question_item"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:background="@drawable/circle_shape_number_question_red"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+    </android.support.constraint.ConstraintLayout>
+    <TextView
+        android:id="@+id/text_number_question_item"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:text="10"
+        android:textStyle="bold"/>
+
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/report_current_question_item"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/circle_shape_current_question">
+
+    </android.support.constraint.ConstraintLayout>
+</android.support.constraint.ConstraintLayout>

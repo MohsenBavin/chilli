@@ -1,0 +1,233 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".VSchance">
+
+<android.support.constraint.ConstraintLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/constraint_my"
+    android:background="#3A0149">
+
+    <ProgressBar
+        android:id="@+id/progress_my_persent"
+        style="@style/MyProgressBarPercent"
+        android:layout_width="100dp"
+        android:layout_height="50dp"
+        android:layout_marginBottom="8dp"
+        android:progress="30"
+        android:secondaryProgress="55"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.1"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.19999999" />
+
+    <ImageView
+        android:id="@+id/img_my_avatar_chanceChalenge"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        android:background="@drawable/circle_shape_blue_storke"
+        android:src="@drawable/iconfinder_44"
+        app:layout_constraintBottom_toBottomOf="@+id/progress_my_persent"
+        app:layout_constraintBottom_toTopOf="@+id/progress_my_persent"
+        app:layout_constraintEnd_toEndOf="@+id/progress_my_persent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/progress_my_persent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <TextView
+        android:id="@+id/text_my_name_chance"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="player 1"
+        android:textColor="@color/colorAmber"
+        android:textSize="20dp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/img_my_avatar_chanceChalenge"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.35"
+        app:layout_constraintStart_toEndOf="@+id/img_my_avatar_chanceChalenge"
+        app:layout_constraintTop_toTopOf="@+id/img_my_avatar_chanceChalenge"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <TextView
+        android:id="@+id/text_my_level_chance"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="سطح 4"
+        android:textColor="@color/colorAmber"
+        android:textSize="15dp"
+        app:layout_constraintEnd_toEndOf="@+id/text_my_name_chance"
+        app:layout_constraintStart_toStartOf="@+id/text_my_name_chance"
+        app:layout_constraintTop_toBottomOf="@+id/text_my_name_chance" />
+
+    <TextView
+        android:id="@+id/text_my_mach_number_chance"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text=" تعداد بازی ها 50"
+        android:textColor="@color/colorAmber"
+        android:textSize="15dp"
+        app:layout_constraintEnd_toEndOf="@+id/text_my_level_chance"
+        app:layout_constraintStart_toStartOf="@+id/text_my_level_chance"
+        app:layout_constraintTop_toBottomOf="@+id/text_my_level_chance" />
+
+    <TextView
+        android:id="@+id/text_my_record_chance"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text=" رکورد توالی بدون شکست 9"
+        android:textColor="@color/colorAmber"
+        android:textSize="15dp"
+        app:layout_constraintEnd_toEndOf="@+id/text_my_mach_number_chance"
+        app:layout_constraintStart_toStartOf="@+id/text_my_mach_number_chance"
+        app:layout_constraintTop_toBottomOf="@+id/text_my_mach_number_chance" />
+
+    <ImageView
+        android:id="@+id/shape_progress_my_persent"
+        android:layout_width="104dp"
+        android:layout_height="100dp"
+        android:src="@drawable/purple_frame"
+        app:layout_constraintBottom_toBottomOf="@+id/progress_my_persent"
+        app:layout_constraintEnd_toEndOf="@+id/progress_my_persent"
+        app:layout_constraintStart_toStartOf="@+id/progress_my_persent"
+        app:layout_constraintTop_toTopOf="@+id/progress_my_persent" />
+</android.support.constraint.ConstraintLayout>
+
+ <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/constraint_rival">
+
+     <ImageView
+         android:id="@+id/image_back_vs_two"
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:scaleType="fitXY"
+         android:src="@drawable/back_vs_two"
+         app:layout_constraintBottom_toBottomOf="parent"
+         app:layout_constraintEnd_toEndOf="parent"
+         app:layout_constraintHorizontal_bias="0.0"
+         app:layout_constraintStart_toStartOf="parent"
+         app:layout_constraintTop_toTopOf="parent"
+         app:layout_constraintVertical_bias="0.0" />
+
+     <ProgressBar
+         android:id="@+id/progress_rival_percent"
+         style="@style/MyProgressBarPercent"
+         android:layout_width="100dp"
+         android:layout_height="50dp"
+         android:progress="65"
+
+         android:secondaryProgress="82"
+         app:layout_constraintBottom_toBottomOf="parent"
+         app:layout_constraintEnd_toEndOf="parent"
+         app:layout_constraintHorizontal_bias="0.9"
+         app:layout_constraintStart_toStartOf="parent"
+         app:layout_constraintTop_toTopOf="parent"
+         app:layout_constraintVertical_bias="0.97" />
+
+     <ImageView
+         android:id="@+id/img_rival_avatar_chance"
+         android:layout_width="100dp"
+         android:layout_height="100dp"
+         android:background="@drawable/circle_shape_blue_storke"
+         android:src="@drawable/iconfinder_45"
+         app:layout_constraintBottom_toTopOf="@+id/progress_rival_percent"
+         app:layout_constraintEnd_toEndOf="@+id/progress_rival_percent"
+         app:layout_constraintStart_toStartOf="@+id/progress_rival_percent"
+         app:layout_constraintTop_toTopOf="parent"
+         app:layout_constraintVertical_bias="0.99" />
+
+     <TextView
+         android:id="@+id/text_rival_name_chance"
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:layout_marginStart="8dp"
+         android:layout_marginEnd="8dp"
+         android:text="player 2"
+         android:textColor="@color/colorAmber"
+         android:textSize="20dp"
+         android:textStyle="bold"
+         app:layout_constraintBottom_toBottomOf="@+id/img_rival_avatar_chance"
+         app:layout_constraintEnd_toStartOf="@+id/img_rival_avatar_chance"
+         app:layout_constraintHorizontal_bias="0.65"
+         app:layout_constraintStart_toStartOf="parent"
+         app:layout_constraintTop_toTopOf="@+id/img_rival_avatar_chance"
+         app:layout_constraintVertical_bias="0.0" />
+
+     <TextView
+         android:id="@+id/text_rival_level_chance"
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:text="سطح 10"
+         android:textColor="@color/colorAmber"
+         android:textSize="15dp"
+         app:layout_constraintEnd_toEndOf="@+id/text_rival_name_chance"
+         app:layout_constraintStart_toStartOf="@+id/text_rival_name_chance"
+         app:layout_constraintTop_toBottomOf="@+id/text_rival_name_chance" />
+
+     <TextView
+         android:id="@+id/text_rival_mach_number_chance"
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:layout_marginTop="8dp"
+         android:text=" تعداد بازی ها 104"
+         android:textColor="@color/colorAmber"
+         android:textSize="15dp"
+         app:layout_constraintEnd_toEndOf="@+id/text_rival_level_chance"
+         app:layout_constraintStart_toStartOf="@+id/text_rival_level_chance"
+         app:layout_constraintTop_toBottomOf="@+id/text_rival_level_chance" />
+
+     <TextView
+         android:id="@+id/text_rival_record_chance"
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:layout_marginTop="8dp"
+         android:text=" رکورد توالی بدون شکست 15"
+         android:textColor="@color/colorAmber"
+         android:textSize="15dp"
+         app:layout_constraintEnd_toEndOf="@+id/text_rival_mach_number_chance"
+         app:layout_constraintStart_toStartOf="@+id/text_rival_mach_number_chance"
+         app:layout_constraintTop_toBottomOf="@+id/text_rival_mach_number_chance" />
+
+     <ImageView
+         android:id="@+id/shape_progress_rival_percent"
+
+         android:layout_width="104dp"
+         android:layout_height="100dp"
+         android:src="@drawable/purple_frame"
+         app:layout_constraintBottom_toBottomOf="@+id/progress_rival_percent"
+         app:layout_constraintEnd_toEndOf="@+id/progress_rival_percent"
+         app:layout_constraintStart_toStartOf="@+id/progress_rival_percent"
+         app:layout_constraintTop_toTopOf="@+id/progress_rival_percent" />
+ </android.support.constraint.ConstraintLayout>
+
+
+
+    <ImageView
+        android:id="@+id/image_vs"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:src="@drawable/vs"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.48"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+
+
+</android.support.constraint.ConstraintLayout>

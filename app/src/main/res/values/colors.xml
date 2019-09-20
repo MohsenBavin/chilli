@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#008577</color>
+    <color name="colorPrimaryDark">#00574B</color>
+    <color name="colorAccent">#D81B60</color>
+    <color name="colorOrange">#EF6C00</color>
+    <color name="colorEmarland">#2ecc71</color>
+    <color name="colorWetasphalt">#34495e</color>
+    <color name="colorNephritis">#27ae60</color>
+    <color name="colorSilver">#bdc3c7</color>
+    <color name="colorGrayEdit">#E0E0E0</color>
+    <color name="colorBlueGray">#90A4AE</color>
+    <color name="colorRedError">#d32f2f</color>
+    <color name="colorBlueText">#03A9F4</color>
+    <color name="colorDarkText">#3E2723</color>
+    <color name="colorWhite">#FFFFFF</color>
+    <color name="red_inactive">#e57373</color>
+    <color name="colorPink">#C2185B</color>
+    <color name="colorYellow">#FDD835</color>
+    <color name="colorRed">#F33631</color>
+    <color name="colorBlueDark">#3949AB</color>
+    <color name="colorBlueDarkOpaque">#cf3949AB</color>
+    <color name="colorGreenDark">#156F19</color>
+    <color name="colorAmber">#FFEB3B</color>
+    <color name="colorPointAnim">#7AECE6B0</color>
+    <color name="colorGreen">#3ECA44</color>
+
+
+
+</resources>

@@ -1,0 +1,254 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/beige_color_background"
+    tools:context=".starterActivities.SignUpFieldStudy">
+
+
+    <ImageView
+        android:id="@+id/circleImageView2"
+        android:layout_width="136dp"
+        android:layout_height="137dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="36dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        android:background="@drawable/circle_shape_blue_storke"
+        android:scaleType="fitXY"
+        android:src="@drawable/hat"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/constraintLayout0"
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+
+        android:layout_marginTop="40dp"
+        android:layout_marginBottom="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/circleImageView2"
+        app:layout_constraintVertical_bias="0.0"
+        tools:layout_editor_absoluteX="0dp">
+
+        <Spinner
+            android:id="@+id/spinner_EducationalLevel"
+            style="@style/MyEditText"
+            android:layout_marginTop="8dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.29000002">
+
+        </Spinner>
+
+        <TextView
+            android:id="@+id/text_spinner_level"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="#FFFFFF"
+            android:text="مقطع تحصیلی..."
+            android:textColor="@color/colorDarkText"
+            android:textSize="30sp"
+            app:layout_constraintBottom_toTopOf="@+id/spinner_EducationalLevel"
+            app:layout_constraintEnd_toEndOf="@+id/spinner_EducationalLevel"
+            app:layout_constraintHorizontal_bias="0.93"
+            app:layout_constraintStart_toStartOf="@+id/spinner_EducationalLevel"
+            app:layout_constraintTop_toBottomOf="@+id/spinner_EducationalLevel"
+            app:layout_constraintVertical_bias="0.489" />
+
+        <ImageView
+            android:id="@+id/imageView4"
+            android:layout_width="35dp"
+            android:layout_height="37dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:scaleType="fitXY"
+            android:src="@drawable/drag"
+            app:layout_constraintBottom_toTopOf="@+id/spinner_EducationalLevel"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.05"
+            app:layout_constraintStart_toStartOf="@+id/spinner_EducationalLevel"
+            app:layout_constraintTop_toBottomOf="@+id/spinner_EducationalLevel" />
+    </android.support.constraint.ConstraintLayout>
+
+    <!--
+        <Spinner
+            android:id="@+id/spinner_EducationalLevel"
+            style="@style/MyEditText"
+            android:layout_height="56dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/circleImageView2"
+            app:layout_constraintVertical_bias="0.07999998" />
+
+
+        <Spinner
+            android:id="@+id/spinner_FieldStudy"
+            style="@style/MyEditText"
+            android:layout_marginBottom="8dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/circleImageView2"
+            app:layout_constraintVertical_bias="0.25" />
+            -->
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/constraintLayout"
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/constraintLayout0"
+        app:layout_constraintVertical_bias="0.0"
+        tools:layout_editor_absoluteX="-16dp">
+
+        <Spinner
+            android:id="@+id/spinner_FieldStudy"
+            style="@style/MyEditText"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/imageView"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.0">
+
+        </Spinner>
+
+        <TextView
+            android:id="@+id/text_spinner_field"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="#FFFFFF"
+            android:text="رشته تحصیلی..."
+            android:textColor="@color/colorDarkText"
+            android:textSize="30sp"
+            app:layout_constraintBottom_toTopOf="@+id/spinner_FieldStudy"
+            app:layout_constraintEnd_toEndOf="@+id/spinner_FieldStudy"
+            app:layout_constraintHorizontal_bias="0.93"
+            app:layout_constraintStart_toStartOf="@+id/spinner_FieldStudy"
+            app:layout_constraintTop_toBottomOf="@+id/spinner_FieldStudy"
+            app:layout_constraintVertical_bias="0.489" />
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="35dp"
+            android:layout_height="37dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:scaleType="fitXY"
+            android:src="@drawable/drag"
+            app:layout_constraintBottom_toTopOf="@+id/spinner_FieldStudy"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.05"
+            app:layout_constraintStart_toStartOf="@+id/spinner_FieldStudy"
+            app:layout_constraintTop_toBottomOf="@+id/spinner_FieldStudy" />
+    </android.support.constraint.ConstraintLayout>
+
+
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/constraintLayout4"
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/constraintLayout"
+        app:layout_constraintVertical_bias="0.0">
+
+        <Spinner
+            android:id="@+id/spinner_zone"
+            style="@style/MyEditText"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/imageView2"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.0">
+
+        </Spinner>
+
+        <TextView
+            android:id="@+id/text_spinner_zone"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="#FFFFFF"
+            android:text="منطقه تحصیلی..."
+            android:textColor="@color/colorDarkText"
+            android:textSize="30sp"
+            app:layout_constraintBottom_toTopOf="@+id/spinner_zone"
+            app:layout_constraintEnd_toEndOf="@+id/spinner_zone"
+            app:layout_constraintHorizontal_bias="0.93"
+            app:layout_constraintStart_toStartOf="@+id/spinner_zone"
+            app:layout_constraintTop_toBottomOf="@+id/spinner_zone"
+            app:layout_constraintVertical_bias="0.489" />
+
+        <ImageView
+            android:id="@+id/imageView2"
+            android:layout_width="35dp"
+            android:layout_height="37dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:scaleType="fitXY"
+            android:src="@drawable/drag"
+            app:layout_constraintBottom_toBottomOf="@+id/spinner_zone"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.04"
+            app:layout_constraintStart_toStartOf="@+id/spinner_zone"
+            app:layout_constraintTop_toTopOf="@+id/spinner_zone" />
+    </android.support.constraint.ConstraintLayout>
+
+
+    <Button
+        android:id="@+id/autocomplete_state"
+        style="@style/MyEditText"
+        android:layout_width="339dp"
+        android:layout_height="54dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        android:maxLength="20"
+        android:singleLine="true"
+        android:text="استان"
+        android:textColor="@color/colorDarkText"
+        android:textSize="30sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/constraintLayout4"
+        app:layout_constraintVertical_bias="0.0">
+
+    </Button>
+
+    <Button
+        android:id="@+id/buttonNextforStudy"
+        style="@style/MyButtonInactive"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        android:gravity="center"
+        android:text="بعدی"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/autocomplete_state"
+        tools:layout_editor_absoluteX="35dp" />
+
+</android.support.constraint.ConstraintLayout>

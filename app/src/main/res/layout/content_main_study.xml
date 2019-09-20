@@ -1,0 +1,827 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#3C2581">
+
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/linearLayout_main_study"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <android.support.constraint.ConstraintLayout
+            android:id="@+id/constraintLayout11"
+            android:layout_width="match_parent"
+            android:layout_height="115dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+
+            <TextView
+                android:id="@+id/txt_pauseTime_study"
+                android:layout_width="80dp"
+                android:layout_height="30dp"
+                android:layout_marginStart="1dp"
+                android:background="@drawable/pause_time_shape"
+                android:gravity="start"
+                android:padding="5dp"
+                android:text="توقف زمان"
+                android:textColor="@color/colorWhite"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toTopOf="@+id/guideline17"
+                app:layout_constraintStart_toStartOf="@+id/guideline16" />
+
+            <TextView
+                android:id="@+id/txt_stop_time"
+                android:layout_width="80dp"
+                android:layout_height="30sp"
+                android:layout_marginEnd="1dp"
+                android:background="@drawable/stop_shape_shape"
+                android:gravity="end"
+                android:padding="5dp"
+                android:text="پایان چالش"
+                android:textColor="@color/colorWhite"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toTopOf="@+id/guideline17"
+                app:layout_constraintEnd_toStartOf="@+id/guideline16" />
+
+
+            <android.support.constraint.ConstraintLayout
+                android:id="@+id/constraintLayout_timer"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:layout_marginBottom="15dp"
+                android:background="@drawable/circle_shape_number_question_gray"
+                app:layout_constraintBottom_toTopOf="@+id/guideline17"
+                app:layout_constraintEnd_toStartOf="@+id/txt_pauseTime_study"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/txt_stop_time">
+
+                <com.github.lzyzsd.circleprogress.CircleProgress
+                    android:id="@+id/progressBar_timer"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    app:circle_finished_color="#F9A825"
+                    android:layout_margin="3dp"
+                    app:circle_text_size="0dp" />
+
+                <TextView
+                    android:id="@+id/totalTime_study"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="02:56"
+                    android:textColor="@color/colorDarkText"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/timer_shape" />
+            </android.support.constraint.ConstraintLayout>
+
+
+            <ImageView
+                android:id="@+id/btn_back_study"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_marginStart="30dp"
+                android:src="@drawable/prev_qu"
+                app:layout_constraintBottom_toTopOf="@+id/textView12"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/btn_next_study" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="قبلی"
+                android:textColor="@color/colorWhite"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="@+id/btn_back_study"
+                app:layout_constraintStart_toStartOf="@+id/btn_back_study"
+                app:layout_constraintTop_toBottomOf="@+id/btn_back_study" />
+
+            <ImageView
+                android:id="@+id/btn_next_study"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="30dp"
+                android:layout_marginBottom="8dp"
+                android:src="@drawable/next_qu"
+                app:layout_constraintBottom_toTopOf="@+id/guideline17"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/textView12"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="بعدی"
+                android:textColor="@color/colorWhite"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="@+id/btn_next_study"
+                app:layout_constraintStart_toStartOf="@+id/btn_next_study"
+                app:layout_constraintTop_toBottomOf="@+id/btn_next_study" />
+
+
+
+            <android.support.constraint.Guideline
+                android:id="@+id/guideline16"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent="0.5" />
+
+            <android.support.constraint.Guideline
+                android:id="@+id/guideline17"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layout_constraintGuide_begin="104dp" />
+
+        </android.support.constraint.ConstraintLayout>
+
+        <ScrollView
+            android:id="@+id/scroll_study"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:background="@drawable/purple_shape"
+            android:fadeScrollbars="false"
+            android:scrollbarSize="5dp"
+            android:scrollbarThumbVertical="@drawable/line_iner"
+            android:scrollbarTrackHorizontal="@drawable/line_drawable"
+            android:scrollbarTrackVertical="@drawable/line_drawable"
+            android:scrollbars="vertical"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior"
+            app:layout_constraintBottom_toTopOf="@+id/guideline3"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/constraintLayout11">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginRight="5dp"
+                android:orientation="vertical">
+
+                <android.support.constraint.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/question_shape"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginTop="10dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent">
+
+                    <TextView
+                        android:id="@+id/text_question_study"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical|end"
+                        android:padding="8dp"
+                        android:layout_marginTop="10dp"
+                        android:minLines="7"
+                        android:text="این بخش از آموزش می تواند برای عده ای از شما بسیار جالب باشد. بعضی از مواقع پیش می آید که احتیاج داریم که صوت در پس زمینه اپلیکیشن اندرویدی ما پخش شود. پس به کار با مدیا پلیر در اندروید نیاز داریم."
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.5"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+                </android.support.constraint.ConstraintLayout>
+
+
+                <android.support.constraint.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <!--*************************************************************************************************-->
+                    <LinearLayout
+                        android:id="@+id/linearLayout_twoOption"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintVertical_bias="0.0">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
+                            android:layout_weight="2"
+                            android:orientation="horizontal">
+
+                            <android.support.constraint.ConstraintLayout
+                                android:layout_width="0dp"
+                                android:layout_height="115dp"
+                                android:layout_marginEnd="8dp"
+                                android:layout_marginStart="8dp"
+                                android:layout_marginTop="8dp"
+                                android:layout_weight="1">
+
+                                <android.support.constraint.ConstraintLayout
+                                    android:id="@+id/constraint_quTwo_study"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:background="@drawable/options_questions_shape"
+                                    android:onClick="constraintOnClick">
+
+                                    <TextView
+                                        android:id="@+id/text_quTwo_study"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginStart="8dp"
+                                        android:layout_marginTop="6dp"
+                                        android:layout_marginEnd="8dp"
+                                        android:layout_marginBottom="8dp"
+                                        android:gravity="right"
+                                        android:text="ggggggggggffffffff  ffffffff  fffhhhh  hhhh   hhhhhh  ggggggggggffffffff  "
+
+                                        android:textSize="15sp"
+                                        app:layout_constraintBottom_toBottomOf="parent"
+                                        app:layout_constraintEnd_toEndOf="parent"
+                                        app:layout_constraintStart_toStartOf="parent"
+                                        app:layout_constraintTop_toTopOf="parent"
+                                        app:layout_constraintVertical_bias="0.0" />
+
+                                    <android.support.constraint.ConstraintLayout
+                                        android:layout_width="25dp"
+                                        android:layout_height="25dp"
+                                        android:layout_marginTop="2dp"
+                                        android:layout_marginEnd="4dp"
+                                        android:background="@drawable/circle_shape_number_question"
+                                        app:layout_constraintEnd_toEndOf="parent"
+                                        app:layout_constraintTop_toTopOf="parent">
+
+                                        <TextView
+                                            android:layout_width="match_parent"
+                                            android:layout_height="match_parent"
+                                            android:gravity="center"
+                                            android:text="2"
+
+                                            android:textSize="20sp"
+                                            android:textStyle="bold"
+                                            app:layout_constraintBottom_toBottomOf="parent"
+                                            app:layout_constraintEnd_toEndOf="parent"
+                                            app:layout_constraintHorizontal_bias="0.5"
+                                            app:layout_constraintStart_toStartOf="parent"
+                                            app:layout_constraintTop_toTopOf="parent" />
+                                    </android.support.constraint.ConstraintLayout>
+
+                                </android.support.constraint.ConstraintLayout>
+                            </android.support.constraint.ConstraintLayout>
+
+                            <android.support.constraint.ConstraintLayout
+                                android:layout_width="0dp"
+                                android:layout_height="115dp"
+                                android:layout_marginEnd="8dp"
+                                android:layout_marginStart="8dp"
+                                android:layout_marginTop="8dp"                                android:layout_weight="1">
+
+                                <android.support.constraint.ConstraintLayout
+                                    android:id="@+id/constraint_quOne_study"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:background="@drawable/options_questions_shape"
+                                    android:onClick="constraintOnClick">
+
+
+                                    <TextView
+                                        android:id="@+id/text_quOne_study"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginStart="8dp"
+                                        android:layout_marginTop="6dp"
+                                        android:layout_marginEnd="8dp"
+                                        android:layout_marginBottom="8dp"
+                                        android:gravity="right"
+                                        android:text="چه کند کز پی دوران نرود چون پرگار
+            هر که در دایرة گردش پرگار افتادn/"
+
+                                        android:textSize="15sp"
+                                        app:layout_constraintBottom_toBottomOf="parent"
+                                        app:layout_constraintEnd_toEndOf="parent"
+                                        app:layout_constraintHorizontal_bias="0.5"
+                                        app:layout_constraintStart_toStartOf="parent"
+                                        app:layout_constraintTop_toTopOf="parent"
+                                        app:layout_constraintVertical_bias="0.0" />
+
+                                    <android.support.constraint.ConstraintLayout
+                                        android:layout_width="25dp"
+                                        android:layout_height="25dp"
+                                        android:layout_marginTop="2dp"
+                                        android:layout_marginEnd="4dp"
+                                        android:background="@drawable/circle_shape_number_question"
+                                        app:layout_constraintEnd_toEndOf="parent"
+                                        app:layout_constraintTop_toTopOf="parent">
+
+                                        <TextView
+                                            android:layout_width="match_parent"
+                                            android:layout_height="match_parent"
+                                            android:gravity="center"
+                                            android:text="1"
+
+                                            android:textSize="20sp"
+                                            android:textStyle="bold"
+                                            app:layout_constraintBottom_toBottomOf="parent"
+                                            app:layout_constraintEnd_toEndOf="parent"
+                                            app:layout_constraintHorizontal_bias="0.5"
+                                            app:layout_constraintStart_toStartOf="parent"
+                                            app:layout_constraintTop_toTopOf="parent" />
+                                    </android.support.constraint.ConstraintLayout>
+
+                                </android.support.constraint.ConstraintLayout>
+                            </android.support.constraint.ConstraintLayout>
+
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
+                            android:layout_weight="2"
+                            android:orientation="horizontal">
+
+                            <android.support.constraint.ConstraintLayout
+                                android:layout_width="0dp"
+                                android:layout_height="115dp"
+                                android:layout_marginEnd="8dp"
+                                android:layout_marginStart="8dp"
+                                android:layout_marginTop="8dp"                                android:layout_weight="1">
+
+                                <android.support.constraint.ConstraintLayout
+                                    android:id="@+id/constraint_qutfour_study"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:background="@drawable/options_questions_shape"
+                                    android:onClick="constraintOnClick">
+
+
+                                    <TextView
+                                        android:id="@+id/text_qufour_study"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginStart="8dp"
+                                        android:layout_marginTop="6dp"
+                                        android:layout_marginEnd="8dp"
+                                        android:layout_marginBottom="8dp"
+                                        android:gravity="right"
+                                        android:text="ggggggggggffffffff  ffffffff  fffhhhh  hhhh   hhhhhh  ggggggggggffffffff  "
+
+                                        android:textSize="15sp"
+                                        app:layout_constraintBottom_toBottomOf="parent"
+                                        app:layout_constraintEnd_toEndOf="parent"
+                                        app:layout_constraintStart_toStartOf="parent"
+                                        app:layout_constraintTop_toTopOf="parent"
+                                        app:layout_constraintVertical_bias="0.0" />
+
+                                    <android.support.constraint.ConstraintLayout
+                                        android:layout_width="25dp"
+                                        android:layout_height="25dp"
+                                        android:layout_marginTop="2dp"
+                                        android:layout_marginEnd="4dp"
+                                        android:background="@drawable/circle_shape_number_question"
+                                        app:layout_constraintEnd_toEndOf="parent"
+                                        app:layout_constraintTop_toTopOf="parent">
+
+                                        <TextView
+                                            android:layout_width="match_parent"
+                                            android:layout_height="match_parent"
+                                            android:gravity="center"
+                                            android:text="4"
+
+                                            android:textSize="20sp"
+                                            android:textStyle="bold"
+                                            app:layout_constraintBottom_toBottomOf="parent"
+                                            app:layout_constraintEnd_toEndOf="parent"
+                                            app:layout_constraintHorizontal_bias="0.5"
+                                            app:layout_constraintStart_toStartOf="parent"
+                                            app:layout_constraintTop_toTopOf="parent" />
+                                    </android.support.constraint.ConstraintLayout>
+
+                                </android.support.constraint.ConstraintLayout>
+                            </android.support.constraint.ConstraintLayout>
+
+
+                            <android.support.constraint.ConstraintLayout
+                                android:layout_width="0dp"
+                                android:layout_height="115dp"
+                                android:layout_marginEnd="8dp"
+                                android:layout_marginStart="8dp"
+                                android:layout_marginTop="8dp"                                android:layout_weight="1">
+
+                                <android.support.constraint.ConstraintLayout
+                                    android:id="@+id/constraint_quthree_study"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:background="@drawable/options_questions_shape"
+                                    android:onClick="constraintOnClick">
+
+
+                                    <TextView
+                                        android:id="@+id/text_quthree_study"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginStart="8dp"
+                                        android:layout_marginTop="6dp"
+                                        android:layout_marginEnd="8dp"
+                                        android:layout_marginBottom="8dp"
+                                        android:gravity="right"
+                                        android:text="چه کند کز پی دوران نرود چون پرگار
+            هر که در دایرة گردش پرگار افتادn/"
+
+                                        android:textSize="15sp"
+                                        app:layout_constraintBottom_toBottomOf="parent"
+                                        app:layout_constraintEnd_toEndOf="parent"
+                                        app:layout_constraintHorizontal_bias="0.5"
+                                        app:layout_constraintStart_toStartOf="parent"
+                                        app:layout_constraintTop_toTopOf="parent"
+                                        app:layout_constraintVertical_bias="0.0" />
+
+                                    <android.support.constraint.ConstraintLayout
+                                        android:layout_width="25dp"
+                                        android:layout_height="25dp"
+                                        android:layout_marginTop="2dp"
+                                        android:layout_marginEnd="4dp"
+                                        android:background="@drawable/circle_shape_number_question"
+                                        app:layout_constraintEnd_toEndOf="parent"
+                                        app:layout_constraintTop_toTopOf="parent">
+
+                                        <TextView
+                                            android:layout_width="match_parent"
+                                            android:layout_height="match_parent"
+                                            android:gravity="center"
+                                            android:text="3"
+
+                                            android:textSize="20sp"
+                                            android:textStyle="bold"
+                                            app:layout_constraintBottom_toBottomOf="parent"
+                                            app:layout_constraintEnd_toEndOf="parent"
+                                            app:layout_constraintHorizontal_bias="0.5"
+                                            app:layout_constraintStart_toStartOf="parent"
+                                            app:layout_constraintTop_toTopOf="parent" />
+                                    </android.support.constraint.ConstraintLayout>
+
+                                </android.support.constraint.ConstraintLayout>
+                            </android.support.constraint.ConstraintLayout>
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                    <!--*************************************************************************************************-->
+                    <LinearLayout
+                        android:id="@+id/linearLayout_linearOption"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintVertical_bias="0.0">
+
+                        <android.support.constraint.ConstraintLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="70dp"
+                            android:layout_marginEnd="8dp"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="8dp">
+
+                            <android.support.constraint.ConstraintLayout
+                                android:id="@+id/constraint_quOne_study_l"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:background="@drawable/options_questions_shape"
+                                android:onClick="constraintOnClick">
+
+
+                                <TextView
+                                    android:id="@+id/text_quOne_study_l"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginStart="8dp"
+                                    android:layout_marginTop="6dp"
+                                    android:layout_marginEnd="8dp"
+                                    android:layout_marginBottom="8dp"
+                                    android:gravity="right"
+                                    android:text=". بعضی از مواقع پیش م. پس به کار با مدیا پلیر در اندروید نیاز داریم."
+
+                                    android:textSize="15sp"
+                                    app:layout_constraintBottom_toBottomOf="parent"
+                                    app:layout_constraintEnd_toEndOf="parent"
+                                    app:layout_constraintHorizontal_bias="0.5"
+                                    app:layout_constraintStart_toStartOf="parent"
+                                    app:layout_constraintTop_toTopOf="parent"
+                                    app:layout_constraintVertical_bias="0.0" />
+
+
+                                <android.support.constraint.ConstraintLayout
+                                    android:layout_width="25dp"
+                                    android:layout_height="25dp"
+                                    android:layout_marginTop="2dp"
+                                    android:layout_marginEnd="4dp"
+                                    android:background="@drawable/circle_shape_number_question"
+                                    app:layout_constraintEnd_toEndOf="parent"
+                                    app:layout_constraintTop_toTopOf="parent">
+
+                                    <TextView
+                                        android:layout_width="match_parent"
+                                        android:layout_height="match_parent"
+                                        android:gravity="center"
+                                        android:text="1"
+                                        android:textSize="20sp"
+                                        android:textStyle="bold"
+                                        app:layout_constraintBottom_toBottomOf="parent"
+                                        app:layout_constraintEnd_toEndOf="parent"
+                                        app:layout_constraintHorizontal_bias="0.5"
+                                        app:layout_constraintStart_toStartOf="parent"
+                                        app:layout_constraintTop_toTopOf="parent" />
+                                </android.support.constraint.ConstraintLayout>
+                            </android.support.constraint.ConstraintLayout>
+                        </android.support.constraint.ConstraintLayout>
+
+
+                        <android.support.constraint.ConstraintLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="70dp"
+                            android:layout_marginEnd="8dp"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="8dp">
+
+                            <android.support.constraint.ConstraintLayout
+                                android:id="@+id/constraint_quTwo_study_l"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:background="@drawable/options_questions_shape"
+                                android:onClick="constraintOnClick">
+
+                                <TextView
+                                    android:id="@+id/text_quTwo_study_l"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginStart="8dp"
+                                    android:layout_marginTop="6dp"
+                                    android:layout_marginEnd="8dp"
+                                    android:layout_marginBottom="8dp"
+                                    android:gravity="right"
+                                    android:text="ggggggggggffffffff  ffffffff  fffhhhh  hhhh   hhhhhh  ggggggggggffffffff ggggggggggffffffff  ffffffff  fffhhhh  hhhh   hhhhhh  ggggggggggffffffff  "
+                                    android:textSize="15sp"
+                                    app:layout_constraintBottom_toBottomOf="parent"
+                                    app:layout_constraintEnd_toEndOf="parent"
+                                    app:layout_constraintStart_toStartOf="parent"
+                                    app:layout_constraintTop_toTopOf="parent"
+                                    app:layout_constraintVertical_bias="0.0" />
+
+                                <android.support.constraint.ConstraintLayout
+                                    android:layout_width="25dp"
+                                    android:layout_height="25dp"
+                                    android:layout_marginTop="2dp"
+                                    android:layout_marginEnd="4dp"
+                                    android:background="@drawable/circle_shape_number_question"
+                                    app:layout_constraintEnd_toEndOf="parent"
+                                    app:layout_constraintTop_toTopOf="parent">
+
+                                    <TextView
+                                        android:layout_width="match_parent"
+                                        android:layout_height="match_parent"
+                                        android:gravity="center"
+                                        android:text="2"
+                                        android:textSize="20sp"
+                                        android:textStyle="bold"
+                                        app:layout_constraintBottom_toBottomOf="parent"
+                                        app:layout_constraintEnd_toEndOf="parent"
+                                        app:layout_constraintHorizontal_bias="0.5"
+                                        app:layout_constraintStart_toStartOf="parent"
+                                        app:layout_constraintTop_toTopOf="parent" />
+                                </android.support.constraint.ConstraintLayout>
+                            </android.support.constraint.ConstraintLayout>
+                        </android.support.constraint.ConstraintLayout>
+
+
+                        <android.support.constraint.ConstraintLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="70dp"
+                            android:layout_marginEnd="8dp"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="8dp">
+
+                            <android.support.constraint.ConstraintLayout
+                                android:id="@+id/constraint_quthree_study_l"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:background="@drawable/options_questions_shape"
+                                android:onClick="constraintOnClick">
+
+
+                                <TextView
+                                    android:id="@+id/text_quthree_study_l"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginStart="8dp"
+                                    android:layout_marginTop="6dp"
+                                    android:layout_marginEnd="8dp"
+                                    android:layout_marginBottom="8dp"
+                                    android:gravity="right"
+                                    android:text="چه کند کز پی دوران نرود چون پرگار
+            هر که در دایرة گردش پرگار افتادn/"
+                                    android:textSize="15sp"
+                                    app:layout_constraintBottom_toBottomOf="parent"
+                                    app:layout_constraintEnd_toEndOf="parent"
+                                    app:layout_constraintHorizontal_bias="0.5"
+                                    app:layout_constraintStart_toStartOf="parent"
+                                    app:layout_constraintTop_toTopOf="parent"
+                                    app:layout_constraintVertical_bias="0.0" />
+
+                                <android.support.constraint.ConstraintLayout
+                                    android:layout_width="25dp"
+                                    android:layout_height="25dp"
+                                    android:layout_marginTop="2dp"
+                                    android:layout_marginEnd="4dp"
+                                    android:background="@drawable/circle_shape_number_question"
+                                    app:layout_constraintEnd_toEndOf="parent"
+                                    app:layout_constraintTop_toTopOf="parent">
+
+                                    <TextView
+                                        android:layout_width="match_parent"
+                                        android:layout_height="match_parent"
+                                        android:gravity="center"
+                                        android:text="3"
+                                        android:textSize="20sp"
+                                        android:textStyle="bold"
+                                        app:layout_constraintBottom_toBottomOf="parent"
+                                        app:layout_constraintEnd_toEndOf="parent"
+                                        app:layout_constraintHorizontal_bias="0.5"
+                                        app:layout_constraintStart_toStartOf="parent"
+                                        app:layout_constraintTop_toTopOf="parent" />
+                                </android.support.constraint.ConstraintLayout>
+                            </android.support.constraint.ConstraintLayout>
+                        </android.support.constraint.ConstraintLayout>
+
+                        <android.support.constraint.ConstraintLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="70dp"
+                            android:layout_marginEnd="8dp"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="8dp">
+
+                            <android.support.constraint.ConstraintLayout
+                                android:id="@+id/constraint_qutfour_study_l"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:background="@drawable/options_questions_shape"
+                                android:onClick="constraintOnClick">
+
+
+                                <TextView
+                                    android:id="@+id/text_qufour_study_l"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginStart="8dp"
+                                    android:layout_marginTop="6dp"
+                                    android:layout_marginEnd="8dp"
+                                    android:layout_marginBottom="8dp"
+                                    android:gravity="right"
+                                    android:text="ggggggggggffffffff  ffffffff  fffhhhh  hhhh   hhhhhh  ggggggggggffffffff  "
+
+                                    android:textSize="15sp"
+                                    app:layout_constraintBottom_toBottomOf="parent"
+                                    app:layout_constraintEnd_toEndOf="parent"
+                                    app:layout_constraintStart_toStartOf="parent"
+                                    app:layout_constraintTop_toTopOf="parent"
+                                    app:layout_constraintVertical_bias="0.0" />
+
+                                <android.support.constraint.ConstraintLayout
+                                    android:layout_width="25dp"
+                                    android:layout_height="25dp"
+                                    android:layout_marginTop="2dp"
+                                    android:layout_marginEnd="4dp"
+                                    android:background="@drawable/circle_shape_number_question"
+                                    app:layout_constraintEnd_toEndOf="parent"
+                                    app:layout_constraintTop_toTopOf="parent">
+
+                                    <TextView
+                                        android:layout_width="match_parent"
+                                        android:layout_height="match_parent"
+                                        android:gravity="center"
+                                        android:text="4"
+
+                                        android:textSize="20sp"
+                                        android:textStyle="bold"
+                                        app:layout_constraintBottom_toBottomOf="parent"
+                                        app:layout_constraintEnd_toEndOf="parent"
+                                        app:layout_constraintHorizontal_bias="0.5"
+                                        app:layout_constraintStart_toStartOf="parent"
+                                        app:layout_constraintTop_toTopOf="parent" />
+                                </android.support.constraint.ConstraintLayout>
+                            </android.support.constraint.ConstraintLayout>
+                        </android.support.constraint.ConstraintLayout>
+
+                    </LinearLayout>
+
+                    <!--*************************************************************************************************-->
+                </android.support.constraint.ConstraintLayout>
+
+            </LinearLayout>
+
+        </ScrollView>
+
+        <android.support.constraint.Guideline
+            android:id="@+id/guideline3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_end="61dp" />
+
+
+
+    </android.support.constraint.ConstraintLayout>
+    <android.support.constraint.Guideline
+        android:id="@+id/guideline44"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.153" />
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/constraint_show_number"
+        android:layout_width="70dp"
+        android:layout_height="26dp"
+        android:layout_marginTop="5dp"
+        android:background="@drawable/show_numbr_shape"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/guideline44">
+
+        <TextView
+            android:id="@+id/current_question_number"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="10"
+            android:textColor="@color/colorDarkText"
+            android:textSize="17sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/textView13"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/textView13"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:text="/"
+            android:textColor="@color/colorDarkText"
+            android:textSize="17sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/all_question_number"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="15"
+            android:textColor="@color/colorDarkText"
+            android:textSize="17sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/textView13"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+    </android.support.constraint.ConstraintLayout>
+    <TextView
+        android:id="@+id/text_start_studyChallenge"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/colorRed"
+        android:textSize="40sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+</android.support.constraint.ConstraintLayout>

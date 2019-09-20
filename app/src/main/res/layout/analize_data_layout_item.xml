@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="120dp"
+    android:layout_marginBottom="5dp"
+    android:layout_marginStart="7dp"
+    android:layout_marginEnd="7dp">
+
+    <TextView
+        android:id="@+id/text_subject_item"
+        style="@style/MyButtonActive"
+        android:layout_width="210dp"
+        android:layout_height="70dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <id.yuana.chart.pie.PieChartView
+        android:id="@+id/pieChart_percent_item"
+        android:layout_width="110dp"
+        android:layout_height="110dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.04"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/button"
+        app:layout_constraintVertical_bias="0.16000003" />
+
+    <id.yuana.chart.pie.PieChartView
+        android:id="@+id/pieChart_accuracy_item"
+        android:layout_width="65dp"
+        android:layout_height="65dp"
+        app:layout_constraintBottom_toBottomOf="@+id/pieChart_percent_item"
+        app:layout_constraintEnd_toEndOf="@+id/pieChart_percent_item"
+        app:layout_constraintStart_toStartOf="@+id/pieChart_percent_item"
+        app:layout_constraintTop_toTopOf="@+id/pieChart_percent_item" />
+
+    <id.yuana.chart.pie.PieChartView
+        android:id="@+id/pieChart_speed_item"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        app:layout_constraintBottom_toBottomOf="@+id/pieChart_accuracy_item"
+        app:layout_constraintEnd_toEndOf="@+id/pieChart_accuracy_item"
+        app:layout_constraintStart_toStartOf="@+id/pieChart_accuracy_item"
+        app:layout_constraintTop_toTopOf="@+id/pieChart_accuracy_item" />
+
+    <ImageView
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:src="@drawable/lemon_chart"
+        app:layout_constraintBottom_toBottomOf="@+id/pieChart_percent_item"
+        app:layout_constraintEnd_toEndOf="@+id/pieChart_percent_item"
+        app:layout_constraintStart_toStartOf="@+id/pieChart_percent_item"
+        app:layout_constraintTop_toTopOf="@+id/pieChart_percent_item" />
+
+    <TextView
+        android:id="@+id/text_percent_item"
+        android:layout_width="42dp"
+        android:layout_height="0dp"
+        android:gravity="center"
+        android:text="60%"
+        android:textSize="10sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/pieChart_speed_item"
+        app:layout_constraintEnd_toEndOf="@+id/pieChart_speed_item"
+        app:layout_constraintStart_toStartOf="@+id/pieChart_speed_item"
+        app:layout_constraintTop_toTopOf="@+id/pieChart_speed_item" />
+
+
+</android.support.constraint.ConstraintLayout>

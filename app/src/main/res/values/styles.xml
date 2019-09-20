@@ -1,0 +1,131 @@
+<resources>
+
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="android:windowActionBarOverlay">true</item>
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+    </style>
+
+
+    <style name="MyProgressBarPercent"
+        parent="@style/Widget.AppCompat.ProgressBar.Horizontal">
+        <item name="colorButtonNormal">#f50057</item>
+        <item name="colorControlActivated">#33691e</item>
+        <item name="colorControlHighlight">#ff6d00</item>
+        <item name="android:progressDrawable">@drawable/progress_percent_draw</item>
+        <item name="android:minWidth">200dp</item>
+    </style>
+
+    <style name="MyProgressSplashChilli"
+        parent="@style/Widget.AppCompat.ProgressBar.Horizontal">
+        <item name="android:progressDrawable">@drawable/progress_chilli_shape</item>
+    </style>
+
+    <style name="MyProgressSplashFire"
+        parent="@style/Widget.AppCompat.ProgressBar.Horizontal">
+        <item name="android:progressDrawable">@drawable/progress_fire_shape</item>
+    </style>
+    <style name="MyProgressTimerStyle"
+        parent="@style/Widget.AppCompat.ProgressBar.Horizontal">
+        <item name="android:progressDrawable">@drawable/progress_timer_shape</item>
+    </style>
+    <declare-styleable name="CircleProgress">
+        <attr name="circle_progress" format="integer"/>
+        <attr name="circle_max" format="integer"/>
+        <attr name="circle_unfinished_color" format="color"/>
+        <attr name="circle_finished_color" format="color"/>
+        <attr name="circle_text_size" format="dimension"/>
+        <attr name="circle_text_color" format="color" />
+        <attr name="circle_prefix_text" format="string"/>
+        <attr name="circle_suffix_text" format="string"/>
+    </declare-styleable>
+    <style name="MyProgressStudyChallenge"
+        parent="@style/Widget.AppCompat.ProgressBar.Horizontal">
+        <item name="android:progressDrawable">@drawable/progress_study_challenge_shape</item>
+    </style>
+
+
+    <style name="MyEditSpinnerStyle">
+        <item name="android:layout_width">150dp</item>
+        <item name="android:layout_height">35dp</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textColor">@color/colorWetasphalt</item>
+        <item name="android:background">@drawable/spinner_edit</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:layout_margin">5dp</item>
+    </style>
+
+<style name="MyButtonActive">
+    <item name="android:layout_width">340dp</item>
+    <item name="android:layout_height">45dp</item>
+    <item name="android:textSize">25sp</item>
+    <item name="android:gravity">center</item>
+    <item name="android:textColor">@color/colorWetasphalt</item>
+    <item name="android:background">@drawable/active_buttonshape</item>
+    <item name="android:textStyle">bold</item>
+    <item name="android:layout_margin">5dp</item>
+</style>
+    <style name="MyButtonInactive">
+        <item name="android:layout_width">340dp</item>
+        <item name="android:layout_height">55dp</item>
+        <item name="android:textSize">25sp</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textColor">@color/colorWetasphalt</item>
+        <item name="android:background">@drawable/inactive_button_shape</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:layout_margin">5dp</item>
+    </style>
+
+    <style name="MyEditText">
+        <item name="android:layout_width">340dp</item>
+        <item name="android:layout_height">55dp</item>
+        <item name="android:textSize">20sp</item>
+        <item name="android:textColor">@color/colorWetasphalt</item>
+        <item name="android:textColorHint">@color/colorBlueGray</item>
+        <item name="android:paddingRight">10dp</item>
+        <item name="android:gravity">center_vertical|right</item>
+        <item name="android:background">@drawable/edit_text_shape</item>
+       <!-- <item name="android:textStyle">bold</item>-->
+        <item name="android:layout_margin">5dp</item>
+    </style>
+    <style name="MyEditTextEdit">
+        <item name="android:layout_width">150dp</item>
+        <item name="android:layout_height">35dp</item>
+        <item name="android:paddingRight">10dp</item>
+        <item name="android:gravity">center_vertical|center_horizontal</item>
+        <item name="android:background">@drawable/edit_text_shape_edit</item>
+        <!-- <item name="android:textStyle">bold</item>-->
+        <item name="android:layout_margin">5dp</item>
+    </style>
+
+    <style name="MyNotEditTextEdit">
+        <item name="android:layout_width">150dp</item>
+        <item name="android:layout_height">35dp</item>
+        <item name="android:paddingRight">10dp</item>
+        <item name="android:gravity">center_vertical|center_horizontal</item>
+        <item name="android:background">@drawable/edit_text_shape_not</item>
+        <!-- <item name="android:textStyle">bold</item>-->
+        <item name="android:layout_margin">5dp</item>
+    </style>
+
+    <style name="AppDialogTheme" parent="Theme.AppCompat.Light.Dialog">
+        <!-- Customize your theme here. -->
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="BottomNavTheme">
+        <item name="colorPrimary">#FF5722</item>
+    </style>
+
+    <style name="spinnerItemStyle" parent="android:Widget.TextView.SpinnerItem">
+    </style>
+
+    <style name="spinnerDropDownItemStyle" parent="android:TextAppearance.Widget.TextView.SpinnerItem">
+
+    </style>
+</resources>

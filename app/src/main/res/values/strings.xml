@@ -1,0 +1,57 @@
+<resources>
+    <string name="app_name">Chilli</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string-array name="state_array">
+        <item>آذر بایجان شرقی</item>
+        <item>آذربایجان غربی</item>
+        <item>اردبیل</item>
+        <item>اصفهان</item>
+        <item>البرز</item>
+        <item>ایلام</item>
+        <item>بوشهر</item>
+        <item>تهران</item>
+        <item>چهار محال و بختیاری</item>
+        <item>خراسان جنوبی</item>
+        <item>خراسان رضوی</item>
+        <item>خراسان شمالی	</item>
+        <item>خوزستان</item>
+        <item>زنجان</item>
+        <item>سمنان</item>
+        <item>سیستان و بلوچستان	</item>
+        <item>فارس</item>
+        <item>قزوین</item>
+        <item>قم</item>
+        <item>کردستان</item>
+        <item>کرمان</item>
+        <item>کرمانشاه</item>
+        <item>کهگیلویه وبویراحمد</item>
+        <item>گلستان</item>
+        <item>گیلان</item>
+        <item>لرستان</item>
+        <item>مازندران</item>
+        <item>مرکزی</item>
+        <item>هرمزگان</item>
+        <item>همدان</item>
+        <item>یزد</item>
+    </string-array>
+
+    <string-array name="edunames_arrays">
+        <item>زیست شناسی دوازدهم</item>
+        <item>فیزیک دوازدهم</item>
+        <item>زبان عربی دوازدهم</item>
+        <item>ادبیات فارسی دوازدهم</item>
+        <item>زبان انگلسیی دوازدهم</item>
+        <item>معارف اسلامی دوازدهم</item>
+        <item>ریاضیات دوازدهم</item>
+        <item>شیمی دوازدهم</item>
+        <item>زبان انگلیسی دوازدهم</item>
+
+
+    </string-array>
+
+    <string name="all_question">همه سوالات</string>
+    <string name="timeConsuming_question">سوالات وقت گیر</string>
+    <string name="difficult_question">سوالات نزده</string>
+</resources>

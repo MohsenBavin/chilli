@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<HorizontalScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/beige_color_background"
+
+    tools:context=".starterActivities.SearchState">
+
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/constraint_search_state"
+        android:layout_height="match_parent"
+
+        android:layout_width="fill_parent"
+        android:layout_gravity="center">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="12dp"
+            android:layout_marginBottom="10dp"
+            android:text="جستجوی نام استان"
+            android:textColor="@color/colorDarkText"
+            android:textSize="25sp"
+            app:layout_constraintBottom_toTopOf="@+id/autocomplete_country"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="1.0" />
+        <AutoCompleteTextView
+            android:id="@+id/autocomplete_country"
+            style="@style/MyEditText"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            android:maxLength="20"
+            android:singleLine="true"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.23000002"
+            tools:context=".starterActivities.SearchState">
+
+        </AutoCompleteTextView>
+
+        <Button
+            android:id="@+id/button_ok_state"
+            style="@style/MyButtonInactive"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            android:gravity="center"
+            android:text="تایید"
+            android:textSize="25sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/autocomplete_country" />
+    </android.support.constraint.ConstraintLayout>
+</HorizontalScrollView>
