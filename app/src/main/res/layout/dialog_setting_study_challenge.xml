@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="350dp"
-    android:layout_height="600dp"
+    android:layout_height="wrap_content"
 
     android:background="@drawable/dialog_shape">
 
@@ -17,13 +17,25 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="چالش تمرینی"
+        android:textColor="@color/colorWhite"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/constraintLayout8"
+        app:layout_constraintEnd_toEndOf="@+id/constraintLayout8"
+        app:layout_constraintStart_toStartOf="@+id/constraintLayout8"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <android.support.constraint.ConstraintLayout
         android:id="@+id/constraintLayout2"
         android:layout_width="match_parent"
         android:layout_height="45dp"
         android:layout_marginStart="2dp"
         android:layout_marginEnd="2dp"
-        android:background="#F04A87"
+        android:background="#F379A5"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
@@ -36,7 +48,7 @@
             android:gravity="center"
             android:text="زیست شناسی"
             android:textColor="#000000"
-            android:textSize="30sp"
+            android:textSize="20sp"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -62,9 +74,9 @@
             android:id="@+id/text_topic_study_dialog"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:gravity="center"
             android:text="زیست شناسی زیست شناسی زیست شناسی"
             android:textColor="#000000"
-            android:gravity="center"
             android:textSize="15sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -78,105 +90,107 @@
         android:id="@+id/text_all_timeStudy"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
         android:text="1:05:55"
         android:textColor="@color/colorBlueText"
-        android:textSize="30sp"
+        android:textSize="24sp"
         android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView18" />
+        app:layout_constraintBaseline_toBaselineOf="@+id/textView18"
+        app:layout_constraintEnd_toEndOf="@+id/btn_plus_questions"
+        app:layout_constraintHorizontal_bias="0.452"
+        app:layout_constraintStart_toStartOf="@+id/btn_minus_questions" />
 
 
     <TextView
         android:id="@+id/textView15"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="40dp"
         android:text="تعداد سوال ها"
         android:textColor="#000000"
-        android:textSize="25dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
+        android:textSize="15sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="@+id/textView18"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="@+id/textView18"
         app:layout_constraintTop_toBottomOf="@+id/text_all_timeStudy" />
 
     <TextView
         android:id="@+id/text_number_questions"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
         android:text="15"
         android:textColor="@color/colorBlueText"
-        android:textSize="25sp"
+        android:textSize="24sp"
         android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="@+id/textView15"
+        app:layout_constraintBottom_toBottomOf="@+id/btn_plus_questions"
         app:layout_constraintEnd_toStartOf="@+id/btn_plus_questions"
-        app:layout_constraintHorizontal_bias="0.41"
         app:layout_constraintStart_toEndOf="@+id/btn_minus_questions"
-        app:layout_constraintStart_toStartOf="@+id/textView15"
-        app:layout_constraintTop_toBottomOf="@+id/textView15" />
+        app:layout_constraintTop_toTopOf="@+id/btn_plus_questions" />
 
     <ImageView
         android:id="@+id/btn_plus_questions"
         android:layout_width="35dp"
         android:layout_height="35dp"
-        android:layout_marginStart="20dp"
+        android:layout_marginEnd="60dp"
         android:scaleType="fitXY"
-        android:src="@drawable/pluse"
-        app:layout_constraintBottom_toBottomOf="@+id/text_number_questions"
-        app:layout_constraintStart_toEndOf="@+id/textView15"
-        app:layout_constraintTop_toBottomOf="@+id/textView15"
-        app:layout_constraintTop_toTopOf="@+id/text_number_questions" />
+        android:src="@drawable/plusea"
+        app:layout_constraintBottom_toBottomOf="@+id/textView15"
+        app:layout_constraintEnd_toStartOf="@+id/textView15"
+        app:layout_constraintTop_toTopOf="@+id/textView15" />
 
     <ImageView
         android:id="@+id/btn_minus_questions"
         android:layout_width="35dp"
         android:layout_height="35dp"
-        android:layout_marginEnd="20dp"
+        android:layout_marginStart="45dp"
         android:scaleType="fitXY"
-        android:src="@drawable/minuus"
-        app:layout_constraintBottom_toBottomOf="@+id/btn_plus_questions"
-        app:layout_constraintEnd_toStartOf="@+id/textView15" />
+        android:src="@drawable/mnusa"
+        app:layout_constraintBottom_toBottomOf="@+id/text_number_questions"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/text_number_questions" />
 
     <TextView
         android:id="@+id/textView16"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="40dp"
         android:text="زمان پاسخ هر سوال"
         android:textColor="#000000"
-        android:textSize="25dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/text_number_questions" />
+        android:textSize="15sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="@+id/textView15"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="@+id/textView15"
+        app:layout_constraintTop_toBottomOf="@+id/textView15" />
 
     <TextView
         android:id="@+id/text_time_studyQuestion"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
         android:text="60"
         android:textColor="@color/colorBlueText"
-        android:textSize="25sp"
+        android:textSize="24sp"
         android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="@+id/text_number_questions"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="@+id/text_number_questions"
-        app:layout_constraintTop_toBottomOf="@+id/textView16" />
+        app:layout_constraintBottom_toBottomOf="@+id/btn_time_study_plus"
+        app:layout_constraintEnd_toStartOf="@+id/btn_time_study_plus"
+        app:layout_constraintStart_toEndOf="@+id/btn_time_study_minus"
+        app:layout_constraintTop_toBottomOf="@+id/textView16"
+        app:layout_constraintTop_toTopOf="@+id/btn_time_study_plus" />
 
     <TextView
         android:id="@+id/textView18"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginEnd="15dp"
         android:text="زمان آزمون"
         android:textColor="#000000"
-        android:textSize="25dp"
+        android:textSize="15sp"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/constraintLayout10" />
 
@@ -184,35 +198,31 @@
         android:id="@+id/textView21"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="8dp"
         android:text="s"
         android:textColor="@color/colorBlueText"
         android:textSize="15sp"
         app:layout_constraintBottom_toBottomOf="@+id/text_time_studyQuestion"
-        app:layout_constraintEnd_toStartOf="@+id/btn_time_study_plus"
-        app:layout_constraintHorizontal_bias="0.136"
         app:layout_constraintStart_toEndOf="@+id/text_time_studyQuestion"
-        app:layout_constraintTop_toBottomOf="@+id/textView16"
-        app:layout_constraintVertical_bias="0.32" />
+        app:layout_constraintTop_toTopOf="@+id/text_time_studyQuestion"
+        app:layout_constraintVertical_bias="0.0" />
 
     <ImageView
         android:id="@+id/btn_time_study_plus"
         android:layout_width="35dp"
         android:layout_height="35dp"
         android:scaleType="fitXY"
-        android:src="@drawable/pluse"
-        app:layout_constraintBottom_toBottomOf="@+id/text_time_studyQuestion"
+        android:src="@drawable/plusea"
+        app:layout_constraintBottom_toBottomOf="@+id/textView16"
         app:layout_constraintEnd_toEndOf="@+id/btn_plus_questions"
         app:layout_constraintStart_toStartOf="@+id/btn_plus_questions"
-        app:layout_constraintTop_toTopOf="@+id/text_time_studyQuestion" />
+        app:layout_constraintTop_toTopOf="@+id/textView16" />
 
     <ImageView
         android:id="@+id/btn_time_study_minus"
         android:layout_width="35dp"
         android:layout_height="35dp"
         android:scaleType="fitXY"
-        android:src="@drawable/minuus"
+        android:src="@drawable/mnusa"
         app:layout_constraintBottom_toBottomOf="@+id/btn_time_study_plus"
         app:layout_constraintEnd_toEndOf="@+id/btn_minus_questions"
         app:layout_constraintStart_toStartOf="@+id/btn_minus_questions"
@@ -221,10 +231,14 @@
 
     <Button
         android:id="@+id/btn_cancel_study"
-        android:layout_width="wrap_content"
+        android:layout_width="120dp"
         android:layout_height="50dp"
-        android:background="@drawable/shape_blue"
+        android:background="@drawable/red_button_shaape"
+        android:gravity="center"
         android:text="انصراف"
+        android:textColor="@color/colorWhite"
+        android:textSize="15sp"
+        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="@+id/btn_start_study"
         app:layout_constraintEnd_toStartOf="@+id/guideline8"
         app:layout_constraintHorizontal_bias="0.5"
@@ -234,15 +248,21 @@
 
     <Button
         android:id="@+id/btn_start_study"
-        android:layout_width="wrap_content"
+        android:layout_width="120dp"
         android:layout_height="50dp"
-        android:background="@drawable/shape_red"
+        android:layout_marginTop="45dp"
+        android:layout_marginBottom="30dp"
+        android:background="@drawable/active_buttonshape"
         android:gravity="center"
         android:text="شروع چالش"
+        android:textColor="@color/colorWhite"
+        android:textSize="15sp"
+        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/guideline8"
-        app:layout_constraintTop_toBottomOf="@+id/text_time_studyQuestion" />
+        app:layout_constraintTop_toBottomOf="@+id/textView16"
+        app:layout_constraintVertical_bias="0.0" />
 
     <android.support.constraint.Guideline
         android:id="@+id/guideline8"

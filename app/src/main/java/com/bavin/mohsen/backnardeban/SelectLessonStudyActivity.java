@@ -17,6 +17,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bavin.mohsen.backnardeban.Classes.Dialogs.ProgressDialog;
 import com.bavin.mohsen.backnardeban.Classes.Dialogs.SettingStudyChallengeDialog;
 import com.bavin.mohsen.backnardeban.Classes.RetrofitClasses.APIRetro;
 import com.bavin.mohsen.backnardeban.Classes.RetrofitClasses.ApiIntarfaceRetro;
@@ -52,7 +53,10 @@ public class SelectLessonStudyActivity extends AppCompatActivity {
         accept_selected.setVolume( 5.0f,5.0f );
         select_sound=MediaPlayer.create(SelectLessonStudyActivity.this , R.raw.click2);
         select_sound.setVolume( 5.0f,5.0f );
-
+        ProgressDialog progressDialog=new ProgressDialog( SelectLessonStudyActivity.this );
+        progressDialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+        progressDialog.setCanceledOnTouchOutside(false);
+        progressDialog.show();
 
 
         String level= Hawk.get( "level" );
@@ -68,8 +72,9 @@ public class SelectLessonStudyActivity extends AppCompatActivity {
                 SelectAdapter selectAdapter=new SelectAdapter( curriculumLessons );
                 recycle_curriculum.setAdapter(selectAdapter);
                 recycle_curriculum.setLayoutManager(new GridLayoutManager(SelectLessonStudyActivity.this, 3));
-                Toast.makeText( SelectLessonStudyActivity.this,"onResponse",Toast.LENGTH_SHORT ).show();
+                //Toast.makeText( SelectLessonStudyActivity.this,"onResponse",Toast.LENGTH_SHORT ).show();
 
+                progressDialog.dismiss();
             }
 
             @Override
@@ -131,7 +136,7 @@ public class SelectLessonStudyActivity extends AppCompatActivity {
                     row_index =position;
                     bookTitle=curriculumLesson.get( position ).getApiBookTitle();
                     topic=curriculumLesson.get( position ).getApiTopic();
-                    button_start_study.setBackground( getResources().getDrawable(R.drawable.shape_red ) );
+                    button_start_study.setBackground( getResources().getDrawable(R.drawable.active_buttonshape ) );
                     notifyDataSetChanged();
                 }
             } );

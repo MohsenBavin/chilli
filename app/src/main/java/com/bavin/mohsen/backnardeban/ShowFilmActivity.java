@@ -19,6 +19,7 @@ import android.widget.VideoView;
 
 import com.bavin.mohsen.backnardeban.Classes.Dialogs.DefaultDialog;
 import com.bavin.mohsen.backnardeban.Classes.Dialogs.CancelShowFilmDialog;
+import com.bavin.mohsen.backnardeban.Classes.Dialogs.ProgressDialog;
 import com.bavin.mohsen.backnardeban.Classes.RetrofitClasses.APIRetro;
 import com.bavin.mohsen.backnardeban.Classes.RetrofitClasses.ApiIntarfaceRetro;
 import com.bavin.mohsen.backnardeban.Classes.RetrofitClasses.GetAnsAddDiamond;
@@ -36,7 +37,7 @@ public class ShowFilmActivity extends AppCompatActivity {
     private  int pStatus=100,pStatus2=0 ;
     private Handler handler = new Handler();
     private Timer timerSp;
-    ProgressBar mProgress,progressStart;
+    ProgressBar mProgress;
     VideoView videoView;
     ImageView cancel_show,play_film;
     int timer=0,diamond;
@@ -48,7 +49,6 @@ public class ShowFilmActivity extends AppCompatActivity {
         setContentView( R.layout.activity_show_film );
         Hawk.init(this).build();
         mProgress =  findViewById(R.id.circularProgressbar );
-        progressStart =  findViewById(R.id.progressStart );
         videoView =  findViewById(R.id.videoView );
         cancel_show =  findViewById(R.id.cancel_show );
         play_film =  findViewById(R.id.play_film );
@@ -60,7 +60,12 @@ public class ShowFilmActivity extends AppCompatActivity {
         play_film.setVisibility( View.GONE );
         //timerSp.cancel();
 
-
+        ProgressDialog progressDialog=new ProgressDialog( ShowFilmActivity.this );
+        progressDialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+        progressDialog.setCanceledOnTouchOutside(false);
+        progressDialog.setCancelable( false );
+        progressDialog.show();
+/*
 
         new Thread(new Runnable() {
             @Override
@@ -81,6 +86,7 @@ public class ShowFilmActivity extends AppCompatActivity {
                 }
             }
         }).start();
+        */
 
        ApiIntarfaceRetro apiIntarface= APIRetro.getAPI().create( ApiIntarfaceRetro.class );
         Call<GetFilmAddress> callFilm=apiIntarface.showFilmCall();
@@ -88,6 +94,7 @@ public class ShowFilmActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<GetFilmAddress> call, Response<GetFilmAddress> response) {
 
+                progressDialog.dismiss();
                  VideoURL=response.body().getApiFilmAddress();
                 showVideo( VideoURL );
 
@@ -144,7 +151,6 @@ public class ShowFilmActivity extends AppCompatActivity {
                play_film.setVisibility( View.GONE );
                mProgress.setVisibility( View.VISIBLE );
                //  Toast.makeText( ShowFilmActivity.this,""+timer,Toast.LENGTH_LONG ).show();
-               progressStart.setVisibility( View.GONE );
                videoView.start();
 
                int current=videoView.getCurrentPosition();

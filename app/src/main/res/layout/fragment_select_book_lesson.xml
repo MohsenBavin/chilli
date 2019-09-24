@@ -73,7 +73,7 @@
                 android:text="شروع چالش"
                 android:layout_marginEnd="30dp"
                 android:layout_marginStart="20dp"
-                android:background="@drawable/shape_red"
+                android:background="@drawable/red_button_shaape"
                 android:gravity="center"/>
 
         </LinearLayout>

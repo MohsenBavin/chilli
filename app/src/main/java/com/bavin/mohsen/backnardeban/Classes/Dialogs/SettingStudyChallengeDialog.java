@@ -97,34 +97,33 @@ public class SettingStudyChallengeDialog extends Dialog implements
         new Handler().postDelayed( new Runnable() {
             @Override
             public void run() {
+
                 switch (v.getId()) {
 
                     case R.id.btn_plus_questions:
 
                         if(quNumber<18){
-
                             if(clickSound)increase.start();
-
                             quNumber +=3;
                             text_all_timeStudy.setText( getTime() );
                             text_number_questions.setText( ""+quNumber );
 
                         }
 
+
+
                         break;
                     case R.id.btn_minus_questions:
 
 
                         if(quNumber>9){
-
                             if(clickSound)  increase.start();
                             quNumber -=3;
                             text_all_timeStudy.setText( getTime() );
                             text_number_questions.setText( ""+quNumber );
+
                         }
 
-
-                        break;
 
                     case R.id.btn_time_study_plus:
 
@@ -135,6 +134,7 @@ public class SettingStudyChallengeDialog extends Dialog implements
                             text_all_timeStudy.setText( getTime() );
                             text_time_studyQuestion.setText( ""+quTime );
                         }
+
 
 
                         break;
@@ -163,10 +163,43 @@ public class SettingStudyChallengeDialog extends Dialog implements
                         dismiss();
                         Intent intent=new Intent( activity, StudyChallengeActivity.class );
                         intent.putExtra( "totalTime",totalTime );
+                        intent.putExtra( "totalquestion",quNumber );
                         activity.startActivity( intent );
                         activity.finish();
 
                         break;
+                }
+                if(quNumber<18){
+                    btn_plus_questions.setImageResource(R.drawable.plusea);
+
+                }
+                else if (quNumber>=18) {
+                    btn_plus_questions.setImageResource(R.drawable.pluse_1);
+
+                }
+                if(quNumber>9){
+                    btn_minus_questions.setImageResource(R.drawable.mnusa);
+
+                }
+                else if(quNumber<=9) {
+                    btn_minus_questions.setImageResource(R.drawable.mnus_1);
+
+                }
+
+                if(quTime>=120){
+                    btn_time_study_plus.setImageResource(R.drawable.pluse_1);
+                }
+                else if(quTime<120){
+                    btn_time_study_plus.setImageResource(R.drawable.plusea);
+
+                }
+
+                if(quTime<=30){
+                    btn_time_study_minus.setImageResource(R.drawable.mnus_1);
+                }
+                else if(quTime>30){
+                    btn_time_study_minus.setImageResource(R.drawable.mnusa);
+
                 }
 
             }

@@ -88,5 +88,11 @@ public  interface ApiIntarfaceRetro {
              @Query("level") String level
             , @Query("field") String field);
 
+    @GET("getStudyQuestions.php")
+    Call<List<GetStudyQuestions>> getStudyQuestions(
+            @Query("bookTitle") String bookTitle
+            ,@Query("topic") String topic
+             ,@Query("number") int number);
+
 }
 
