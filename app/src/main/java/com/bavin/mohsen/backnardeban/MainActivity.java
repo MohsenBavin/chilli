@@ -1,39 +1,26 @@
 package com.bavin.mohsen.backnardeban;
 
+import android.content.Context;
 import android.content.Intent;
-import android.graphics.Typeface;
+import android.os.Bundle;
 import android.preference.PreferenceManager;
-import android.support.annotation.NonNull;
-import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
-import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
-import android.support.v7.widget.Toolbar;
-
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.Toast;
 
 import com.bavin.mohsen.backnardeban.Classes.MainMusicService;
 import com.bavin.mohsen.backnardeban.fragments.HomeFragment;
 import com.bavin.mohsen.backnardeban.fragments.SettingFragment;
 import com.bavin.mohsen.backnardeban.fragments.ShopFragment;
-import com.bavin.mohsen.backnardeban.starterActivities.SplashActivity;
 import com.gauravk.bubblenavigation.BubbleNavigationConstraintView;
-import com.gauravk.bubblenavigation.BubbleNavigationLinearView;
 import com.gauravk.bubblenavigation.listener.BubbleNavigationChangeListener;
-import com.luseen.spacenavigation.SpaceItem;
-import com.luseen.spacenavigation.SpaceNavigationView;
-import com.luseen.spacenavigation.SpaceOnClickListener;
 import com.orhanobut.hawk.Hawk;
 
-import java.util.ArrayList;
-import java.util.Timer;
-import java.util.TimerTask;
+import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -59,8 +46,6 @@ HomeFragment frgHome = new HomeFragment();
             Hawk.put("sound","on" );
         }
 
-        //Intent getUsername=getIntent();
-        //userName=getUsername.getStringExtra( "username" );
 
       setFrgHome();
 
@@ -165,5 +150,9 @@ HomeFragment frgHome = new HomeFragment();
         a.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(a);
         finish();
+    }
+    @Override
+    protected void attachBaseContext(Context newBase) {
+        super.attachBaseContext( CalligraphyContextWrapper.wrap(newBase));
     }
 }

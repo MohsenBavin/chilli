@@ -39,7 +39,7 @@
                 android:id="@+id/button_start_study"
                 android:layout_width="200dp"
                 android:layout_height="40dp"
-                android:background="@drawable/red_button_shaape"
+                android:background="@drawable/button_red_shape"
                 android:text="شروع چالش"
                 android:textColor="@color/colorWhite"
                 android:textSize="20sp"

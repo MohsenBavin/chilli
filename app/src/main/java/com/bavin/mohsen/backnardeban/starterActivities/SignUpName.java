@@ -17,11 +17,11 @@ import android.widget.Toast;
 
 import com.bavin.mohsen.backnardeban.Classes.RetrofitClasses.APIRetro;
 import com.bavin.mohsen.backnardeban.Classes.RetrofitClasses.ApiIntarfaceRetro;
-import com.bavin.mohsen.backnardeban.Classes.RetrofitClasses.GetLoginDataRetro;
 import com.bavin.mohsen.backnardeban.Classes.RetrofitClasses.GetRegisterLoginDataRetro;
 import com.bavin.mohsen.backnardeban.MainActivity;
 import com.bavin.mohsen.backnardeban.R;
 import com.bumptech.glide.Glide;
+import com.google.firebase.iid.FirebaseInstanceId;
 import com.orhanobut.hawk.Hawk;
 
 import retrofit2.Call;
@@ -116,7 +116,7 @@ protected  static ApiIntarfaceRetro apiInterfaceRetro;
 
 
                 if (enterNameIsOk==true  ){
-                    buttonSignUp.setBackground( getResources().getDrawable(R.drawable.active_buttonshape ) );
+                    buttonSignUp.setBackground( getResources().getDrawable(R.drawable.button_green_shape ) );
                 }
                 else {buttonSignUp.setBackground( getResources().getDrawable(R.drawable.edit_text_shape) );}
 
@@ -146,9 +146,11 @@ protected  static ApiIntarfaceRetro apiInterfaceRetro;
                     String state=Hawk.get( "state" );
                     String zone=Hawk.get( "zone" );
                     String avatar=Hawk.get("avatarId");
-                   ApiIntarfaceRetro apiIntarface= APIRetro.getAPI().create( ApiIntarfaceRetro.class );
+                    String token = FirebaseInstanceId.getInstance().getToken();
+
+                    ApiIntarfaceRetro apiIntarface= APIRetro.getAPI().create( ApiIntarfaceRetro.class );
                     Call<GetRegisterLoginDataRetro> regCall=apiIntarface.loginRegisterCall
-                            ( phone,name,level,field,avatar,zone,state );
+                            ( phone,name,level,field,avatar,zone,state,token );
                     regCall.enqueue( new Callback<GetRegisterLoginDataRetro>() {
                         @Override
                         public void onResponse(Call<GetRegisterLoginDataRetro> call, Response<GetRegisterLoginDataRetro> response) {

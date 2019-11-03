@@ -70,7 +70,6 @@
         android:id="@+id/spinner_zone_edid"
         style="@style/MyEditSpinnerStyle"
         android:background="@null"
-        android:popupBackground="@android:color/transparent"
         android:textSize="15sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

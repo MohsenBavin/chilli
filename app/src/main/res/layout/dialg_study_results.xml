@@ -175,7 +175,7 @@
         android:layout_height="50dp"
         android:layout_marginTop="40dp"
         android:layout_marginBottom="8dp"
-        android:background="@drawable/active_buttonshape"
+        android:background="@drawable/button_green_shape"
         android:clickable="true"
         android:text="مشاهده پاسخ ها"
         android:textColor="@color/colorWhite"

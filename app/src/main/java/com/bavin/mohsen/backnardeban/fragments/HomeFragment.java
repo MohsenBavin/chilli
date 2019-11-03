@@ -2,6 +2,10 @@ package com.bavin.mohsen.backnardeban.fragments;
 
 
 import android.annotation.SuppressLint;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
@@ -9,6 +13,8 @@ import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.NotificationCompat;
+import android.support.v7.widget.Toolbar;
 import android.view.GestureDetector;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -20,21 +26,18 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.view.animation.ScaleAnimation;
 import android.widget.ImageView;
-import android.support.v7.widget.Toolbar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.bavin.mohsen.backnardeban.ChanceChalengeMachActivity;
 import com.bavin.mohsen.backnardeban.Classes.Dialogs.ShowTimerDialog;
-import com.bavin.mohsen.backnardeban.SelectChanceChallengeActivity;
 import com.bavin.mohsen.backnardeban.MainActivity;
 import com.bavin.mohsen.backnardeban.R;
+import com.bavin.mohsen.backnardeban.SearchFriendlyNameActivity;
+import com.bavin.mohsen.backnardeban.SelectChanceChallengeActivity;
 import com.bavin.mohsen.backnardeban.SelectLessonStudyActivity;
 import com.bavin.mohsen.backnardeban.ShowFilmActivity;
 import com.bavin.mohsen.backnardeban.SocketTestActivity;
-import com.bavin.mohsen.backnardeban.StudyChallengeActivity;
 import com.bavin.mohsen.backnardeban.UserActivity;
-import com.bavin.mohsen.backnardeban.VSchance;
 import com.bumptech.glide.Glide;
 import com.orhanobut.hawk.Hawk;
 
@@ -45,10 +48,10 @@ import de.hdodenhof.circleimageview.CircleImageView;
 
 public class HomeFragment extends Fragment
 {
-    private ImageView img_chance_challenge,img_friendly_challenge,img_study_challenge,mgtst,imageFilm,imageMessage,imageNotif;
+    private ImageView img_chance_challenge,img_friendly_challenge,img_study_challenge,imageFilm,imageMessage,imageNotif;
     private ImageView buttonForward,buttonBack;
     private CircleImageView circleImageUser;
-    private TextView text_userName,text_level,text_diamond;
+    private TextView text_userName,text_level,text_diamond,textView30;
     private Toolbar toolbar;
     private static int state=1;
     private static boolean ok=true,image1Click=false;
@@ -103,7 +106,7 @@ public class HomeFragment extends Fragment
         img_study_challenge=view.findViewById( R.id.cir_image_3 );
         buttonForward=view.findViewById( R.id.btn_back );
         buttonBack=view.findViewById( R.id.btn_forward );
-        mgtst=view.findViewById( R.id.imageView7 );
+       // mgtst=view.findViewById( R.id.imageView7 );
         imageMessage=view.findViewById( R.id.image_message );
         imageFilm=view.findViewById( R.id.image_Film );
         imageNotif=view.findViewById( R.id.image_notif );
@@ -112,6 +115,7 @@ public class HomeFragment extends Fragment
         text_level=view.findViewById( R.id.text_level );
         circleImageUser=view.findViewById( R.id.circleImage_user );
         text_diamond=view.findViewById( R.id.text_diamond );
+        textView30=view.findViewById( R.id.textView30 );
 
 
 //*********************************** Toolbar *************************************
@@ -224,12 +228,7 @@ public class HomeFragment extends Fragment
 //******************************  ClickListeners  ***********************************
 /****** imageFilm ******************************************************************/
 
-mgtst.setOnClickListener( new View.OnClickListener() {
-    @Override
-    public void onClick(View v) {
 
-    }
-} );
 imageNotif.setOnClickListener( new View.OnClickListener() {
     @Override
     public void onClick(View v) {
@@ -244,8 +243,26 @@ imageNotif.setOnClickListener( new View.OnClickListener() {
 imageMessage.setOnClickListener( new View.OnClickListener() {
     @Override
     public void onClick(View v) {
-        startActivity(new Intent( getContext(), SelectLessonStudyActivity.class  ) );
-        getActivity().finish();
+
+            NotificationManager mNotificationManager =
+                    (NotificationManager) getActivity().getSystemService( Context.NOTIFICATION_SERVICE);
+            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+                NotificationChannel channel = new NotificationChannel("YOUR_CHANNEL_ID",
+                        "YOUR_CHANNEL_NAME",
+                        NotificationManager.IMPORTANCE_DEFAULT);
+                channel.setDescription("YOUR_NOTIFICATION_CHANNEL_DISCRIPTION");
+                mNotificationManager.createNotificationChannel(channel);
+            }
+            NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(getActivity(), "YOUR_CHANNEL_ID")
+                    .setSmallIcon(R.drawable.chilli) // notification icon
+                    .setContentTitle("چیلی") // title for notification
+                    .setContentText("تست چیلی")// message for notification
+                    .setAutoCancel(true); // clear notification after click
+            Intent intent = new Intent(getActivity(), SelectLessonStudyActivity.class);
+            PendingIntent pi = PendingIntent.getActivity(getContext(), 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+            mBuilder.setContentIntent(pi);
+            mNotificationManager.notify(0, mBuilder.build());
+
 
 
     }
@@ -452,6 +469,10 @@ imageMessage.setOnClickListener( new View.OnClickListener() {
                 getActivity().runOnUiThread( new Runnable() {
                     @Override
                     public void run() {
+                        if(Hawk.contains( "pointh" )){
+                            String pointh=Hawk.get( "pointh" );
+                            textView30.setText( pointh );
+                        }
 
                         if ((nowtime >= timewaite) ) {
 
@@ -548,7 +569,9 @@ imageMessage.setOnClickListener( new View.OnClickListener() {
                                         Animation.RELATIVE_TO_SELF, 1f);
                                 anim.setFillAfter(true);
                                 img_chance_challenge.startAnimation(anim);
-                                startActivity( new Intent( getContext(), ChanceChalengeMachActivity.class ) );
+                               // startActivity( new Intent( getContext(), ChanceChalengeMachActivity.class ) );
+                                //startActivity( new Intent( getContext(), VSchance.class ) );
+                                startActivity( new Intent( getContext(), SelectChanceChallengeActivity.class ) );
 
                                 getActivity().finish();
                                 
@@ -563,7 +586,7 @@ imageMessage.setOnClickListener( new View.OnClickListener() {
                                 anim.setFillAfter(true);
                                 img_friendly_challenge.startAnimation(anim);
 
-                                startActivity( new Intent( getContext(), VSchance.class ) );
+                                startActivity( new Intent( getContext(), SearchFriendlyNameActivity.class ) );
                                 getActivity().finish();
 
                             }

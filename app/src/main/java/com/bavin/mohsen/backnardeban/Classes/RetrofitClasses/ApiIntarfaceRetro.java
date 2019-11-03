@@ -1,5 +1,6 @@
 package com.bavin.mohsen.backnardeban.Classes.RetrofitClasses;
 
+import com.bavin.mohsen.backnardeban.Classes.RetrofitClasses.Model.GetFiendNotifAnswer;
 import com.bavin.mohsen.backnardeban.Classes.RetrofitClasses.Model.ThirdExperimentNum;
 
 import java.util.List;
@@ -24,6 +25,7 @@ public  interface ApiIntarfaceRetro {
            , @Query("avatar") String avatar
             , @Query("zone") String zone
             , @Query("state") String state
+            , @Query("tokenId") String tokenId
     );
 
 
@@ -31,7 +33,9 @@ public  interface ApiIntarfaceRetro {
     Call<GetLoginDataRetro> loginCall(@Query("username") String UserName);
 
     @GET("chekPhoneState.php")
-    Call<GetPhoneStateRetro> checkPhoneCall(@Query("phoneNum") String phoneNum);
+    Call<GetPhoneStateRetro> checkPhoneCall(
+            @Query("phoneNum") String phoneNum
+            ,@Query("id") String id);
 
     @GET("filmAddress.php")
     Call<GetFilmAddress> showFilmCall();
@@ -94,5 +98,15 @@ public  interface ApiIntarfaceRetro {
             ,@Query("topic") String topic
              ,@Query("number") int number);
 
+
+    @GET("searchFriendlyChallenge.php")
+    Call<List<GetFriendsList>> getFriendsList(
+            @Query("username") String username);
+
+    @GET("sendNotif.php")
+    Call<GetFiendNotifAnswer> fiendNotifAnswe(
+            @Query("token") String token
+            ,@Query("title") String title
+            ,@Query("body") String body);
 }
 

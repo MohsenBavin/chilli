@@ -1,27 +1,16 @@
 package com.bavin.mohsen.backnardeban;
 
-import android.annotation.SuppressLint;
-import android.os.AsyncTask;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.TypedValue;
+import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
-
-import com.bavin.mohsen.backnardeban.Classes.Adapters.JustifiedTextView;
 
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.json.JSONTokener;
 
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.OutputStreamWriter;
 import java.net.URISyntaxException;
 
 import io.socket.client.IO;
@@ -36,9 +25,12 @@ public class SocketTestActivity extends AppCompatActivity {
     private Socket socket;
     {
         try {
-            socket= IO.socket("http://192.168.1.100:3000");
+            socket= IO.socket("http://chilliquiz.ir/socket:3000");
+            Log.e("socketLog","try socket");
+
         } catch (URISyntaxException e) {
             e.printStackTrace();
+            Log.e("socketLog","error socket");
         }
     }
 
@@ -63,10 +55,13 @@ public class SocketTestActivity extends AppCompatActivity {
                     public void run() {
                         JSONObject jsonObject = (JSONObject) args[0];
                         try {
+                            Log.e("socketLog","try message");
+
                             ReciveMessage( jsonObject.getString( "message" ),"other"  );
                         }
                         catch (JSONException e) {
                             e.printStackTrace();
+                            Log.e("socketLog","error message");
                         }
 
                     }
@@ -110,8 +105,18 @@ public class SocketTestActivity extends AppCompatActivity {
                 try {
                     sendmsg.put("message",text);
                     socket.emit("message",sendmsg);
+                    Log.e("socketLog","send message");
+                    if (socket.connected()){
+                        Log.e("socketLog","socket.connected");
+                    }else{
+                        Log.e("socketLog","socket is not connected(");
+
+                    }
+
                 } catch (JSONException e) {
                     e.printStackTrace();
+                    Log.e("socketLog","error send message");
+
                 }
 
             }

@@ -111,7 +111,7 @@
         <TextView
             android:id="@+id/text_level"
             android:layout_width="wrap_content"
-            android:layout_height="26dp"
+            android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginEnd="10dp"
             android:text="سوم تجربی"
@@ -123,18 +123,31 @@
             app:layout_constraintTop_toBottomOf="@+id/text_user_name"
             app:layout_constraintVertical_bias="0.23000002" />
 
-        <ImageView
-            android:id="@+id/imageView7"
-            android:layout_width="350dp"
-            android:layout_height="70dp"
-            android:layout_marginBottom="8dp"
-            android:background="@drawable/active_buttonshape"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
+        <TextView
+            android:id="@+id/textView30"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="امتیاز : 1100"
+            android:textColor="@color/colorDarkText"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toStartOf="@+id/circleImage_user"
+            app:layout_constraintTop_toBottomOf="@+id/circleImage_user" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="رتبه : 100"
+            android:textColor="@color/colorDarkText"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@+id/textView30"
+            app:layout_constraintEnd_toStartOf="@+id/textView30"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/text_level"
-            app:layout_constraintVertical_bias="0.06999999" />
+            app:layout_constraintTop_toTopOf="@+id/textView30" />
+
 
         <ImageView
             android:layout_width="match_parent"

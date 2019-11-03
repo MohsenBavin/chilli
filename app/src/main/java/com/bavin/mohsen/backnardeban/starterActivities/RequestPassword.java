@@ -1,20 +1,18 @@
 package com.bavin.mohsen.backnardeban.starterActivities;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
-import android.content.res.Configuration;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.support.constraint.ConstraintLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
-import android.view.ViewTreeObserver;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
-import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -46,10 +44,10 @@ public class RequestPassword extends AppCompatActivity {
     private String ConfirmCodeGet;
     private boolean ConfirmCodeIsOk=false;
     private static int xRand;
-    private ImageView imageViewLogo;
+   // private ImageView imageViewLogo;
     boolean isOpened = false;
 
-    private ScrollView constraintRequestPassword;
+    private ConstraintLayout constraintRequestPassword;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate( savedInstanceState );
@@ -64,7 +62,7 @@ public class RequestPassword extends AppCompatActivity {
         textConfirmMobile=findViewById( R.id.text_confirm_mobile );
         getConfirmCode=findViewById( R.id.edt_get_telephone );
         constraintRequestPassword=findViewById( R.id.constraint_RequestPassword );
-        imageViewLogo=findViewById( R.id.imageViewLogo );
+        //imageViewLogo=findViewById( R.id.imageViewLogo );
 
 //************************ Set view listeners ******************************************************
 //*** constraintRequestPassword ***************
@@ -85,10 +83,10 @@ public class RequestPassword extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if(retry==true){
-                    buttonCounter.setBackground( getResources().getDrawable(R.drawable.inactive_button_shape) );
+                    buttonCounter.setBackground( getResources().getDrawable(R.drawable.button_inactive_shape ) );
                     if ( ConfirmCodeIsOk==true){
                         ConfirmCodeIsOk=false;
-                        buttonNext.setBackground( getResources().getDrawable(R.drawable.inactive_button_shape ) );}
+                        buttonNext.setBackground( getResources().getDrawable(R.drawable.button_inactive_shape ) );}
                     timerCounter=30000;
                     Random ran = new Random();
                     xRand = ran.nextInt(11111) + 55555;
@@ -155,9 +153,9 @@ buttonBack.setOnClickListener( new View.OnClickListener() {
                 }
 
                 if ( ConfirmCodeIsOk==true){
-                    buttonNext.setBackground( getResources().getDrawable(R.drawable.active_buttonshape ) );
+                    buttonNext.setBackground( getResources().getDrawable(R.drawable.button_green_shape ) );
                 }
-                else {buttonNext.setBackground( getResources().getDrawable(R.drawable.inactive_button_shape) );}
+                else {buttonNext.setBackground( getResources().getDrawable(R.drawable.button_inactive_shape ) );}
 
 
             }
@@ -179,15 +177,7 @@ textConfirmMobile.setText( confrmPhone );
 
 //**************************************************************************************************
 
-        setListnerToRootView();
-
-
-
-
-
-
-
-
+        //setListnerToRootView();
     }
     public void setTimerCounter(){
         timer=new Timer(  );
@@ -203,7 +193,7 @@ textConfirmMobile.setText( confrmPhone );
                         buttonCounter.setText(setText);
                         if(timerCounter==0) {
                             buttonCounter.setText("ارسال مجدد کد");
-                            buttonCounter.setBackground( getResources().getDrawable(R.drawable.active_buttonshape) );
+                            buttonCounter.setBackground( getResources().getDrawable(R.drawable.button_green_shape ) );
                             retry=true;
 
                             timer.cancel();
@@ -289,7 +279,7 @@ textConfirmMobile.setText( confrmPhone );
         } );
     }
 
-
+/*
     public void setListnerToRootView(){
         final View activityRootView = getWindow().getDecorView().findViewById(android.R.id.content);
         activityRootView.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
@@ -314,27 +304,36 @@ textConfirmMobile.setText( confrmPhone );
             }
         });
     }
-
+*/
     private void checkPhoneState() {
         String phone= Hawk.get("phone");
-
+        @SuppressLint("HardwareIds")
+        String android_id = Settings.Secure.getString(this.getContentResolver(), Settings.Secure.ANDROID_ID);
+        // Log.d("Android","Android ID : " + android_id);
         ApiIntarfaceRetro intarfaceRetro= APIRetro.getAPI().create( ApiIntarfaceRetro.class );
-        Call<GetPhoneStateRetro> checkPhoneCall=intarfaceRetro.checkPhoneCall( phone );
+        Call<GetPhoneStateRetro> checkPhoneCall=intarfaceRetro.checkPhoneCall( phone,android_id );
         checkPhoneCall.enqueue( new Callback<GetPhoneStateRetro>() {
             @Override
             public void onResponse(Call<GetPhoneStateRetro> call, Response<GetPhoneStateRetro> response) {
                 String answer= response.body().getApiAnswer();
-                Toast.makeText( RequestPassword.this,answer,Toast.LENGTH_SHORT ).show();
+              Toast.makeText( RequestPassword.this,answer,Toast.LENGTH_SHORT ).show();
                 switch (answer){
                     case "registerd":
-
                         Hawk.put("phoneState", "registerd");
-
+                        getLoginData();
+                        break;
+                    case "login":
+                        Hawk.put("phoneState", "login");
+                        Toasty.error( RequestPassword.this,
+                                "این اکانت برای یگ گوشی دیگر فعال است",Toasty.LENGTH_SHORT ).show();
                         break;
                     case "SUCCESS":
                         Hawk.put("phoneState", "SUCCESS");
                         // intent.putExtra( "phone",phone);
-
+                        Intent intent = new Intent(RequestPassword.this, SignUpFieldStudy.class);
+                        intent.putExtra( "statement","no" );
+                        startActivity(intent);
+                        finish();
                         break;
                     case "ERROR":
                         checkPhoneState();
@@ -342,14 +341,6 @@ textConfirmMobile.setText( confrmPhone );
 
                 }
 
-                if(answer.equals( "registerd" )){
-                    getLoginData();
-                }else if(answer.equals( "SUCCESS" )){
-                    Intent intent = new Intent(RequestPassword.this, SignUpFieldStudy.class);
-                    intent.putExtra( "statement","no" );
-                    startActivity(intent);
-                    finish();
-                }
             }
 
             @Override
@@ -365,8 +356,8 @@ textConfirmMobile.setText( confrmPhone );
 
     @Override
     public void onBackPressed() {
-        super.onBackPressed();
+       /* super.onBackPressed();
         startActivity( new Intent( RequestPassword.this,SignUpTelephone.class ) );
-        finish();
+        finish();*/
     }
 }

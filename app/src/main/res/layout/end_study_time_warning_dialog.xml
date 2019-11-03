@@ -20,7 +20,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="پایان چالش"
+        android:text="اتمام زمان"
         android:textColor="@color/colorWhite"
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="@+id/view5"
@@ -30,7 +30,7 @@
 
 
     <TextView
-        android:id="@+id/text_warning_endStudy"
+        android:id="@+id/text_warning_endTime"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
@@ -51,55 +51,52 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
+        android:layout_marginTop="15dp"
         android:text="وقت بیشتری می خوای؟"
         android:textColor="#000000"
         android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.479"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/text_warning_endStudy" />
+        app:layout_constraintTop_toBottomOf="@+id/text_warning_endTime" />
 
     <Button
-        android:id="@+id/btn_continue_study"
+        android:id="@+id/btn_get_time_study"
         android:layout_width="115dp"
         android:layout_height="40dp"
         android:layout_gravity="center"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="30dp"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="30dp"
-        android:background="@drawable/active_buttonshape"
+        android:background="@drawable/button_green_shape"
         android:clickable="true"
         android:text="وقت اضافه"
         android:textColor="@color/colorWhite"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/guideline4"
         app:layout_constraintTop_toBottomOf="@+id/textView27"
         app:layout_constraintVertical_bias="0.0" />
 
     <Button
-        android:id="@+id/btn_end_study"
+        android:id="@+id/btn_end_studyTime"
         android:layout_width="115dp"
         android:layout_height="40dp"
         android:layout_gravity="center"
         android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
-        android:background="@drawable/red_button_shaape"
+        android:background="@drawable/button_red_shape"
         android:clickable="true"
-        android:text="اتمام آزمون"
+        android:text="پایان چالش"
         android:textColor="@color/colorWhite"
         android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="@+id/btn_continue_study"
+        app:layout_constraintBottom_toBottomOf="@+id/btn_get_time_study"
         app:layout_constraintEnd_toStartOf="@+id/guideline4"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/btn_continue_study" />
+        app:layout_constraintTop_toTopOf="@+id/btn_get_time_study" />
 
     <android.support.constraint.Guideline
         android:id="@+id/guideline4"

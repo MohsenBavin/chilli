@@ -1,5 +1,6 @@
 package com.bavin.mohsen.backnardeban;
 
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.ColorDrawable;
 import android.media.MediaPlayer;
@@ -12,6 +13,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -32,6 +34,7 @@ import java.util.List;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
 public class SelectLessonStudyActivity extends AppCompatActivity {
     private RecyclerView recycle_curriculum;
@@ -39,8 +42,8 @@ public class SelectLessonStudyActivity extends AppCompatActivity {
     private List<GetCurriculumLessons> curriculumLessons;
     int row_index=-1;
     private boolean clickSound=false;
-    String bookTitle,topic;
-    MediaPlayer select_sound,accept_selected;
+   private String bookTitle,topic;
+   private MediaPlayer select_sound,accept_selected;
 
 
     @Override
@@ -90,6 +93,7 @@ public class SelectLessonStudyActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if(row_index!=-1){
+                    button_start_study.startAnimation( AnimationUtils.loadAnimation(getBaseContext(), R.anim.button_click_animation));
                     SettingStudyChallengeDialog okDialog= new SettingStudyChallengeDialog
                             (SelectLessonStudyActivity.this,bookTitle,topic);
 
@@ -136,7 +140,7 @@ public class SelectLessonStudyActivity extends AppCompatActivity {
                     row_index =position;
                     bookTitle=curriculumLesson.get( position ).getApiBookTitle();
                     topic=curriculumLesson.get( position ).getApiTopic();
-                    button_start_study.setBackground( getResources().getDrawable(R.drawable.active_buttonshape ) );
+                    button_start_study.setBackground( getResources().getDrawable(R.drawable.button_green_click_state ) );
                     notifyDataSetChanged();
                 }
             } );
@@ -192,5 +196,9 @@ public class SelectLessonStudyActivity extends AppCompatActivity {
     public void onBackPressed() {
         startActivity( new Intent( SelectLessonStudyActivity.this,MainActivity.class ) );
         finish();
+    }
+    @Override
+    protected void attachBaseContext(Context newBase) {
+        super.attachBaseContext( CalligraphyContextWrapper.wrap(newBase));
     }
 }

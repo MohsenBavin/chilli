@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.view.View;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -124,6 +125,7 @@ public class SettingStudyChallengeDialog extends Dialog implements
 
                         }
 
+                        break;
 
                     case R.id.btn_time_study_plus:
 
@@ -151,12 +153,15 @@ public class SettingStudyChallengeDialog extends Dialog implements
                         break;
 
                     case R.id.btn_cancel_study:
+                        btn_cancel_study.startAnimation( AnimationUtils.loadAnimation(activity, R.anim.button_click_animation));
+
                         reject= MediaPlayer.create(activity , R.raw.reject);
                         reject.setVolume( 5.0f,5.0f );
                         if(clickSound)reject.start();
                         dismiss();
                         break;
                     case R.id.btn_start_study:
+                        btn_start_study.startAnimation( AnimationUtils.loadAnimation(activity, R.anim.button_click_animation));
                         accept_selected= MediaPlayer.create(activity , R.raw.accept_seslect_study);
                         accept_selected.setVolume( 5.0f,5.0f );
                         if(clickSound) accept_selected.start();

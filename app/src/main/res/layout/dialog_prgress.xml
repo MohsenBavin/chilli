@@ -10,7 +10,6 @@
         android:layout_height="match_parent"
         android:progress="25"
         android:max="39"
-        android:theme="@style/progressBarRed"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

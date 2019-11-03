@@ -25,13 +25,9 @@
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recycle_curriculum"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="0dp"
         android:layout_marginTop="10dp"
-        android:layout_marginStart="5dp"
-        android:layout_centerVertical="true"
-        android:layout_centerHorizontal="true"
-        android:layout_centerInParent="true"
         app:layout_constraintBottom_toTopOf="@+id/constraintLayout9"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -55,7 +51,7 @@
             android:id="@+id/button_start_study"
             android:layout_width="200dp"
             android:layout_height="40dp"
-            android:background="@drawable/inactive_button_shape"
+            android:background="@drawable/button_inactive_shape"
             android:text="تایید"
             android:textColor="@color/colorWhite"
             android:gravity="center"

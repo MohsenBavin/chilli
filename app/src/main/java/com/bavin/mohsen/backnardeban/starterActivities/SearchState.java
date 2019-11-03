@@ -10,7 +10,6 @@ import android.text.TextWatcher;
 import android.view.View;
 import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
@@ -19,10 +18,7 @@ import android.widget.Toast;
 import com.bavin.mohsen.backnardeban.R;
 import com.orhanobut.hawk.Hawk;
 
-import java.lang.reflect.Array;
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 
 import es.dmoral.toasty.Toasty;
 
@@ -69,9 +65,9 @@ public class SearchState extends AppCompatActivity {
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 stateName= textState.getText().toString();
                 if (contains = Arrays.asList(state_array).contains(stateName))
-                    buttonOkState.setBackground( getResources().getDrawable(R.drawable.active_buttonshape ) );
+                    buttonOkState.setBackground( getResources().getDrawable(R.drawable.button_green_shape ) );
 
-                else buttonOkState.setBackground( getResources().getDrawable(R.drawable.inactive_button_shape ) );
+                else buttonOkState.setBackground( getResources().getDrawable(R.drawable.button_inactive_shape ) );
 
 
             }

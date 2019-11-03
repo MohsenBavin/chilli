@@ -19,7 +19,6 @@ import com.bavin.mohsen.backnardeban.Classes.RetrofitClasses.APIRetro;
 import com.bavin.mohsen.backnardeban.Classes.RetrofitClasses.ApiIntarfaceRetro;
 import com.bavin.mohsen.backnardeban.Classes.RetrofitClasses.GetAnsupdateAvatar;
 import com.bavin.mohsen.backnardeban.Classes.RetrofitClasses.GetAvatarsAddress;
-import com.bavin.mohsen.backnardeban.Classes.RetrofitClasses.GetLoginDataRetro;
 import com.bavin.mohsen.backnardeban.R;
 import com.bavin.mohsen.backnardeban.UserActivity;
 import com.bumptech.glide.Glide;
@@ -143,7 +142,7 @@ public AvatarList(List<GetAvatarsAddress> address){
             @Override
             public void onClick(View view) {
                 row_index = i;
-                buttonOk.setBackground( getResources().getDrawable(R.drawable.active_buttonshape ) );
+                buttonOk.setBackground( getResources().getDrawable(R.drawable.button_green_shape ) );
                 notifyDataSetChanged();
 
             }

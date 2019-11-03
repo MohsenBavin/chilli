@@ -164,7 +164,7 @@ public class SelectChanceStudyFragment extends Fragment {
         @Override
         public MySelectViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
             View view= LayoutInflater.from( viewGroup.getContext() )
-                    .inflate( R.layout.select_study_item,viewGroup,false );
+                    .inflate( R.layout.item_select_chance_study,viewGroup,false );
             MySelectViewHolder holder;
             holder=new MySelectViewHolder( view );
             return holder;
@@ -274,7 +274,8 @@ public class SelectChanceStudyFragment extends Fragment {
             public MySelectViewHolder(@NonNull View itemView) {
                 super( itemView );
                 cProgres_chance_item=itemView.findViewById( R.id.cProgres_chance_item );
-                text_chance_study_item=itemView.findViewById( R.id.text_chance_study_item );
+                text_chance_study_item=itemView.findViewById( R.id.
+                        text_chance_study_item );
                 text_nemberSelect_chance_item=itemView.findViewById( R.id.text_nemberSelect_chance_item );
                 img_endSelect_chakce_item=itemView.findViewById( R.id.img_endSelect_chakce_item );
 

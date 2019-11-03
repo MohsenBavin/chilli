@@ -1,19 +1,17 @@
 package com.bavin.mohsen.backnardeban;
 
+import android.content.Context;
 import android.content.Intent;
-import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.media.MediaPlayer;
-import android.os.Handler;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.constraint.ConstraintLayout;
 import android.support.design.widget.BottomSheetBehavior;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
-import android.support.v4.widget.SlidingPaneLayout;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -22,23 +20,18 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.view.animation.ScaleAnimation;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.ProgressBar;
-import android.widget.RadioButton;
-import android.widget.RadioGroup;
-import android.widget.SeekBar;
-import android.widget.SlidingDrawer;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bavin.mohsen.backnardeban.Classes.Adapters.SetStudyViewPgerAdapter;
-import com.bavin.mohsen.backnardeban.Classes.Dialogs.EndStudyChallengeDialog;
-import com.bavin.mohsen.backnardeban.Classes.Dialogs.GameSettingDialog;
+import com.bavin.mohsen.backnardeban.Classes.Dialogs.EndStudyTimeWarningDialog;
 import com.bavin.mohsen.backnardeban.Classes.Dialogs.ProgressDialog;
 import com.bavin.mohsen.backnardeban.Classes.Dialogs.ReturnChallengeDialog;
+import com.bavin.mohsen.backnardeban.Classes.Dialogs.StopStudyChallengeDialog;
 import com.bavin.mohsen.backnardeban.Classes.Dialogs.StudyResultsDialog;
 import com.bavin.mohsen.backnardeban.Classes.Dialogs.WarningExiteMachDialog;
 import com.bavin.mohsen.backnardeban.Classes.MainMusicService;
@@ -51,18 +44,16 @@ import com.bavin.mohsen.backnardeban.fragments.ShowQuestionmultipleFragment;
 import com.github.lzyzsd.circleprogress.CircleProgress;
 import com.orhanobut.hawk.Hawk;
 
-import java.sql.Time;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Locale;
 import java.util.Timer;
 import java.util.TimerTask;
 
-import es.dmoral.toasty.Toasty;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
 public class StudyChallengeActivity extends AppCompatActivity implements ShowQuestionLinearFragment.OnHeadlineSelectedListener
  , ShowQuestionmultipleFragment.OnHeadlineSelectedListener{
@@ -73,10 +64,11 @@ public class StudyChallengeActivity extends AppCompatActivity implements ShowQue
     private boolean slideIsOpen=false,clickSound=false;
     RecyclerView recycler_report_study_line,recycler_report_study_all;
     ProgressDialog progressDialog;
-    int correctNumber,incorrectNumber,unansweredNumber,totalNumber;
+    int correctNumber,incorrectNumber,unansweredNumber;
     List<Integer> myAnswer=new ArrayList<>(  );
+    List<Integer> optionsAnswer=new ArrayList<>(  );
     CoordinatorLayout coordinatorLayout;
-    LinearLayout linear_answer_guide;
+    LinearLayout linear_answer_guide,linear_question_guide;
     TextView totalTime_study;
     TextView text_question_study;
     TextView all_question_number,current_question_number;
@@ -87,10 +79,15 @@ public class StudyChallengeActivity extends AppCompatActivity implements ShowQue
     ViewPager view_Study_question,view_Study_answer;
 
     MediaPlayer true_sound,false_sound;
-
+    StudyChallengeActivity.ShowLineQuestions adapterQuestionReycle;
+    StudyChallengeActivity.ShowLineQuestions adapterQuestionReycleAll;
+    AnswerQuestionReport adapterAnswer;
+    AnswerQuestionReport adapterAnswerAll;
     //ProgressBar progressBar_timer;
     CircleProgress progressBar_timer;
 
+    LinearLayoutManager horizontalLayoutManagaer =
+            new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
 
     ConstraintLayout constraint_show_number,constraintLayout_timer,constraintLayout_header_study,constraintLayout_main_study;
 
@@ -105,13 +102,15 @@ public class StudyChallengeActivity extends AppCompatActivity implements ShowQue
     int statusTime;
     boolean pauseTimer=false,endTime=false;
     String showTime;
-    public void onArticleSelected(int position) {
-        // The user selected the headline of an article from the HeadlinesFragment
-        // Do something here to display that article
-        myAnswer.set( currentNumber,position );
-        Toast.makeText( StudyChallengeActivity.this,"" +myAnswer,Toast.LENGTH_SHORT).show();
 
+    public void onArticleSelected(int position) {
+        myAnswer.set( currentNumber,position );
+        adapterQuestionReycle.notifyDataSetChanged();
+        adapterQuestionReycleAll.notifyDataSetChanged();
     }
+
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate( savedInstanceState );
@@ -127,23 +126,25 @@ public class StudyChallengeActivity extends AppCompatActivity implements ShowQue
         for (int i=0;i<=questionNumbers-1;i++){
             myAnswer.add( 0 );
         }
-        //bottomSheetSetup();
         findOptions();
+        bottomSheetSetup();
+         adapterQuestionReycle = new
+                StudyChallengeActivity.ShowLineQuestions( myAnswer, currentNumber + 1 );
+         adapterQuestionReycleAll = new
+                StudyChallengeActivity.ShowLineQuestions(  myAnswer, currentNumber + 1);
+        adapterAnswer = new StudyChallengeActivity.AnswerQuestionReport( optionsAnswer, myAnswer );
 
         constraint_show_number.setVisibility( View.INVISIBLE );
         constraintLayout_main_study.setVisibility( View.INVISIBLE );
         constraintLayout_header_study.setVisibility( View.INVISIBLE );
-        coordinatorLayout.setVisibility( View.INVISIBLE );
+        coordinatorLayout.setVisibility( View.GONE );
+        recycler_report_study_all.setVisibility( View.GONE );
+        button_slide.setVisibility( View.INVISIBLE );
         progressDialog=new ProgressDialog( StudyChallengeActivity.this );
         progressDialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
         progressDialog.setCanceledOnTouchOutside(false);
         progressDialog.show();
         getQuestions();
-
-
-
-
-
 
         btn_next_study.setOnClickListener( new View.OnClickListener() {
             @Override
@@ -151,15 +152,29 @@ public class StudyChallengeActivity extends AppCompatActivity implements ShowQue
 
                 if(challengeState.equals( "inChallenge" )){
                     if (currentNumber<questionNumbers-1){
+                        btn_next_study.startAnimation( AnimationUtils.loadAnimation(getBaseContext(), R.anim.image_click_animation));
                         currentNumber++;
                         view_Study_question.setCurrentItem( currentNumber );
                         current_question_number.setText( ""+(currentNumber+1) );
+                        adapterQuestionReycle.notifyDataSetChanged();
+                        adapterQuestionReycleAll.notifyDataSetChanged();
+                       if(currentNumber>=3) horizontalLayoutManagaer.scrollToPositionWithOffset(currentNumber-3, currentNumber);
+                       else horizontalLayoutManagaer.scrollToPositionWithOffset(0, 5);
+
+
                     }
                 }else if(challengeState.equals( "inAnswer" )){
                     if (currentNumber<questionNumbers-1){
+                        btn_next_study.startAnimation( AnimationUtils.loadAnimation(getBaseContext(), R.anim.image_click_animation));
                         currentNumber++;
                         view_Study_answer.setCurrentItem( currentNumber );
                         current_question_number.setText( ""+(currentNumber+1) );
+                        adapterAnswer.notifyDataSetChanged();
+                        adapterAnswerAll.notifyDataSetChanged();
+                        if(currentNumber>=3) horizontalLayoutManagaer.scrollToPositionWithOffset(currentNumber-3, currentNumber);
+                       else horizontalLayoutManagaer.scrollToPositionWithOffset(0, 5);
+
+
                     }
 
                 }
@@ -170,20 +185,33 @@ public class StudyChallengeActivity extends AppCompatActivity implements ShowQue
             @Override
             public void onClick(View v) {
 
+
                 if(challengeState.equals( "inChallenge" )){
-                    if (currentNumber<questionNumbers-1){
                         if (currentNumber>0){
+                            btn_back_study.startAnimation( AnimationUtils.loadAnimation(getBaseContext(), R.anim.image_click_animation));
                             currentNumber--;
                             view_Study_question.setCurrentItem( currentNumber );
                             current_question_number.setText( ""+(currentNumber+1) );
+                            adapterQuestionReycle.notifyDataSetChanged();
+                            adapterQuestionReycleAll.notifyDataSetChanged();
+                            if(currentNumber>=3) horizontalLayoutManagaer.scrollToPositionWithOffset(currentNumber-3, currentNumber);
+                            else horizontalLayoutManagaer.scrollToPositionWithOffset(0, 5);
+
+
                         }
-                    }
                 }else if(challengeState.equals( "inAnswer" )){
 
                     if (currentNumber>0){
+                        btn_back_study.startAnimation( AnimationUtils.loadAnimation(getBaseContext(), R.anim.image_click_animation));
                         currentNumber--;
                         view_Study_answer.setCurrentItem( currentNumber );
                         current_question_number.setText( ""+(currentNumber+1) );
+                        adapterAnswer.notifyDataSetChanged();
+                        adapterAnswerAll.notifyDataSetChanged();
+                        if(currentNumber>=3) horizontalLayoutManagaer.scrollToPositionWithOffset(currentNumber-3, currentNumber);
+                        else horizontalLayoutManagaer.scrollToPositionWithOffset(0, 5);
+
+
                     }
 
 
@@ -208,6 +236,11 @@ public class StudyChallengeActivity extends AppCompatActivity implements ShowQue
                  currentNumber = view_Study_question.getCurrentItem();
                 current_question_number.setText( ""+(currentNumber+1) );
 
+                adapterQuestionReycle.notifyDataSetChanged();
+                adapterQuestionReycleAll.notifyDataSetChanged();
+                if(currentNumber>=3) horizontalLayoutManagaer.scrollToPositionWithOffset(currentNumber-3, currentNumber);
+                else horizontalLayoutManagaer.scrollToPositionWithOffset(0, 5);
+
             }
         } );
 
@@ -226,6 +259,11 @@ public class StudyChallengeActivity extends AppCompatActivity implements ShowQue
             public void onPageScrollStateChanged(int i) {
                 currentNumber = view_Study_answer.getCurrentItem();
                 current_question_number.setText( ""+(currentNumber+1) );
+                adapterAnswer.notifyDataSetChanged();
+                adapterAnswerAll.notifyDataSetChanged();
+                if(currentNumber>=3) horizontalLayoutManagaer.scrollToPositionWithOffset(currentNumber-3, currentNumber);
+                else horizontalLayoutManagaer.scrollToPositionWithOffset(0, 5);
+
 
             }
         } );
@@ -234,13 +272,18 @@ public class StudyChallengeActivity extends AppCompatActivity implements ShowQue
         btn_stop_study.setOnClickListener( new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                showDialogs("stop");
+                btn_stop_study.startAnimation( AnimationUtils.loadAnimation(getBaseContext(), R.anim.image_click_animation));
+
+                if(endTime) showDialogs("endStop");
+                else showDialogs("stop");
             }
         } );
 
         btn_pauseTime.setOnClickListener( new View.OnClickListener() {
+
             @Override
             public void onClick(View v) {
+                v.startAnimation( AnimationUtils.loadAnimation(getBaseContext(), R.anim.image_click_animation));
                 showDialogs( "pause" );
             }
         } );
@@ -249,30 +292,8 @@ public class StudyChallengeActivity extends AppCompatActivity implements ShowQue
             @Override
             public void onClick(View v) {
 
-                if (challengeState.equals( "inChallenge" )){
-                    if(endTime==true){
-                        currentNumber=0;
-                        challengeState="inAnswer";
-                        totalTime_study.setVisibility( View.GONE );
-                        currentNumber=0;
-                       // startAnswer(currentNumber);
-                        totalTime_study.setVisibility( View.GONE );
-                    }
-                }else if(challengeState.equals( "inAnswer" )){
-                    StudyResultsDialog studyResultsDialog=new
-                            StudyResultsDialog(StudyChallengeActivity.this,correctNumber,incorrectNumber,unansweredNumber,totalNumber  );
-                    studyResultsDialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
-                    studyResultsDialog.setCanceledOnTouchOutside(false);
-                    studyResultsDialog.show();
-                    studyResultsDialog.findViewById( R.id. btn_show_answers).setOnClickListener( new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            Toast.makeText( StudyChallengeActivity.this,"inChallenge",Toast.LENGTH_SHORT ).show();
-                            //progressBar_timer.setProgress( 100 );
-                            studyResultsDialog.dismiss();
-
-                        }
-                    } );
+                if(challengeState.equals( "inAnswer" )){
+                   showDialogs( "endChallenge" );
                 }
 
 
@@ -290,6 +311,9 @@ public class StudyChallengeActivity extends AppCompatActivity implements ShowQue
             @Override
             public void onResponse(Call<List<GetStudyQuestions>> call, Response<List<GetStudyQuestions>> response) {
                 questionLessons=response.body();
+                for (int i=0;i<questionLessons.size();i++){
+                    optionsAnswer.add( questionLessons.get( i ).getApiAnswerQuestions() );
+                }
                 timerStartChallenge();
                 progressDialog.dismiss();
 
@@ -309,6 +333,13 @@ private void setViewPager(String state){
 
     //viewFragments.clear();
     if(state.equals( "inChallenge" )){
+
+        recycler_report_study_all.setAdapter( adapterQuestionReycleAll );
+        recycler_report_study_all.setLayoutManager(new GridLayoutManager(getBaseContext(), 7));
+        recycler_report_study_line.setAdapter( adapterQuestionReycle );
+
+        recycler_report_study_line.setLayoutManager(horizontalLayoutManagaer);
+
         view_Study_answer.setVisibility( View.GONE );
         view_Study_question.setVisibility( View.VISIBLE );
         List<Fragment> viewFragments=new ArrayList<>(  );
@@ -347,8 +378,24 @@ private void setViewPager(String state){
         view_Study_question.setAdapter( pagerAdapter );
         setTimer();
     }else if(state.equals( "inAnswer" )){
+        currentNumber=0;
+        challengeState="inAnswer";
+        progressBar_timer.setProgress(100);
+        current_question_number.setText( ""+1 );
         view_Study_answer.setVisibility( View.VISIBLE );
         view_Study_question.setVisibility( View.GONE );
+
+
+        recycler_report_study_line.setLayoutManager(horizontalLayoutManagaer);
+        recycler_report_study_line.setAdapter( adapterAnswer );
+
+         adapterAnswerAll = new
+                AnswerQuestionReport(  optionsAnswer,myAnswer);
+        recycler_report_study_all.setAdapter( adapterAnswerAll );
+        recycler_report_study_all.setLayoutManager(new GridLayoutManager(getBaseContext(), 7));
+
+
+
         List<Fragment> viewFragmentsAns=new ArrayList<>(  );
 
         for (int i=0;i<=questionNumbers-1;i++){
@@ -379,7 +426,6 @@ private void setViewPager(String state){
             }
 
         }
-        currentNumber=0;
         SetStudyViewPgerAdapter pagerAdapterAns;
         pagerAdapterAns=new SetStudyViewPgerAdapter( getSupportFragmentManager(),viewFragmentsAns,questionLessons );
         view_Study_answer.setAdapter( pagerAdapterAns );
@@ -407,7 +453,8 @@ private void setViewPager(String state){
                         if(!pauseTimer){
                             pStatusSeek += 1;
                             progressBar_timer.setProgress(pStatusSeek);
-                            if (pStatusSeek == 0) {
+                            if (pStatusSeek ==100) {
+                                timerSeek.cancel();
                             }
                         }
 
@@ -448,24 +495,47 @@ private void setViewPager(String state){
 
 
     }
-    //****************************************************************************************************************//
- //*********************** bottomSheetsetup() ************************************//
+
+    private void moreTime(){
+        statusTime=0;
+        timerShow = new Timer();
+        timerShow.schedule( new TimerTask() {
+            @Override
+            public void run() {
+                runOnUiThread( new Runnable() {
+                    // @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
+                    @Override
+                    public void run() {
+                        if(!pauseTimer){
+                            statusTime+=1;
+                            long secound=statusTime;
+                            long mint=secound/60;
+                            secound %=60;
+                            showTime= String.format( Locale.ENGLISH,"%02d",mint)+" : "+String.format(Locale.ENGLISH,"%02d",secound);
+                            totalTime_study.setText( showTime );
+
+                        }
+
+                    }
+                } );
+            }
+        }, 0, 1000 );
+    }
+    /**********************************************************************************/
+//*********************** bottomSheetsetup() ************************************//
     private void bottomSheetSetup() {
         View bottomSheet = findViewById(R.id.bottom_sheet);
 
 
         bottomSheetBehavior = BottomSheetBehavior.from(bottomSheet);
         bottomSheetBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
-        button_slide=findViewById( R.id.button_slide );
-        coordinatorLayout=findViewById( R.id.coordinatorLayout );
-        linear_answer_guide=findViewById( R.id.linear_answer_guide );
 
 
-        //recycler_report_study_line.setVisibility( View.VISIBLE );
-        //recycler_report_study_all.setVisibility( View.GONE );
-        //linear_answer_guide.setVisibility( View.GONE );
 
-
+        recycler_report_study_line.setVisibility( View.VISIBLE );
+        recycler_report_study_all.setVisibility( View.GONE );
+        linear_answer_guide.setVisibility( View.GONE );
+        linear_question_guide.setVisibility( View.VISIBLE );
 
 
         button_slide.setOnClickListener( new View.OnClickListener() {
@@ -474,10 +544,14 @@ private void setViewPager(String state){
                 if(slideIsOpen){
                     bottomSheetBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
                     slideIsOpen=false;
+                    button_slide.setImageResource(R.drawable.up);
+
                 }
                 else {
                     bottomSheetBehavior.setState(BottomSheetBehavior.STATE_EXPANDED);
                     slideIsOpen=true;
+                    button_slide.setImageResource(R.drawable.down);
+
 
                 }
 
@@ -493,17 +567,28 @@ private void setViewPager(String state){
             @Override
             public void onStateChanged(@NonNull View view, int i) {
                 if (i == BottomSheetBehavior.STATE_COLLAPSED) {
+                    slideIsOpen=false;
+                    button_slide.setImageResource(R.drawable.up);
+
                     recycler_report_study_line.setVisibility( View.VISIBLE );
                     recycler_report_study_all.setVisibility( View.GONE );
 
                     if(challengeState.equals( "inAnswer" )){
                         linear_answer_guide.setVisibility( View.GONE );
+                        linear_question_guide.setVisibility( View.VISIBLE );
+
+
                     }
 
                 } else if (i == BottomSheetBehavior.STATE_EXPANDED) {
+                    slideIsOpen=true;
+                    button_slide.setImageResource(R.drawable.down);
+
                     recycler_report_study_line.setVisibility( View.GONE );
                     if(challengeState.equals( "inAnswer" )){
                         linear_answer_guide.setVisibility( View.VISIBLE );
+                        linear_question_guide.setVisibility( View.GONE );
+
                     }
                     recycler_report_study_all.setVisibility( View.VISIBLE );
 
@@ -519,8 +604,7 @@ private void setViewPager(String state){
         });
     }
 //*********************** bottomSheetsetup() ************************************//
-    /**********************************************************************************/
-    //**************************************************************************************//
+    /**********************************************************************************/    //**************************************************************************************//
 
     private void showDialogs(String mode) {
         switch (mode){
@@ -533,6 +617,7 @@ private void setViewPager(String state){
                 returnChallengeDialog.findViewById( R.id.btn_return_challenge ).setOnClickListener( new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
+                        v.startAnimation( AnimationUtils.loadAnimation(getBaseContext(), R.anim.button_click_animation));
                         pauseTimer=false;
                         returnChallengeDialog.dismiss();
                     }
@@ -540,8 +625,9 @@ private void setViewPager(String state){
                 break;
 
             case "stop":
-                EndStudyChallengeDialog warnDialog= new EndStudyChallengeDialog
-                        (StudyChallengeActivity.this,"stop");
+                pauseTimer=true;
+                StopStudyChallengeDialog warnDialog= new StopStudyChallengeDialog
+                        (StudyChallengeActivity.this,true);
                 warnDialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
                 warnDialog.setCanceledOnTouchOutside(false);
                 warnDialog.setCancelable(false);
@@ -549,6 +635,7 @@ private void setViewPager(String state){
                 warnDialog.findViewById( R.id.btn_continue_study  ).setOnClickListener( new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
+                        pauseTimer=false;
                         warnDialog.dismiss();
 
                     }
@@ -556,12 +643,35 @@ private void setViewPager(String state){
                 warnDialog.findViewById( R.id.btn_end_study  ).setOnClickListener( new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        challengeState="inAnswer";
+                        showDialogs( "endChallenge" );
+                        progressBar_timer.setProgress( 100 );
                         setViewPager( "inAnswer" );
-
-
                         warnDialog.dismiss();
+                    }
+                } );
+                break;
+            case "endStop":
+                pauseTimer=true;
+                StopStudyChallengeDialog esDialog= new StopStudyChallengeDialog
+                        (StudyChallengeActivity.this,false);
+                esDialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+                esDialog.setCanceledOnTouchOutside(false);
+                esDialog.setCancelable(false);
+                esDialog.show();
+                esDialog.findViewById( R.id.btn_continue_study  ).setOnClickListener( new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        pauseTimer=false;
+                        esDialog.dismiss();
 
+                    }
+                } );
+                esDialog.findViewById( R.id.btn_end_study  ).setOnClickListener( new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        showDialogs( "endChallenge" );
+                        setViewPager( "inAnswer" );
+                        esDialog.dismiss();
                     }
                 } );
                 break;
@@ -569,58 +679,66 @@ private void setViewPager(String state){
                 text_stop_time.setVisibility( View.GONE );
                 txt_pauseTime_study.setVisibility( View.GONE );
 
-                EndStudyChallengeDialog warnTimeDialog= new EndStudyChallengeDialog
-                        (StudyChallengeActivity.this,"endTime");
+                EndStudyTimeWarningDialog warnTimeDialog= new EndStudyTimeWarningDialog
+                        (StudyChallengeActivity.this);
                 warnTimeDialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
                 warnTimeDialog.setCanceledOnTouchOutside(false);
                 warnTimeDialog.show();
-                warnTimeDialog.findViewById( R.id.btn_continue_study  ).setOnClickListener( new View.OnClickListener() {
+                warnTimeDialog.findViewById( R.id.btn_get_time_study  ).setOnClickListener( new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        totalTime_study.setText( "پایان چالش و دیدن جوابها" );
+
+                        moreTime();
                         warnTimeDialog.dismiss();
 
                     }
                 } );
-                warnTimeDialog.findViewById( R.id.btn_end_study  ).setOnClickListener( new View.OnClickListener() {
+                warnTimeDialog.findViewById( R.id.btn_end_studyTime  ).setOnClickListener( new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        Toast.makeText( StudyChallengeActivity.this,"inChallenge",Toast.LENGTH_SHORT ).show();
+                        showDialogs( "endChallenge" );
+                        setViewPager( "inAnswer" );
+                        warnTimeDialog.dismiss();
 
-                        totalTime_study.setVisibility( View.GONE );
+                    }
+                } );
+                break;
+            case "endChallenge":
 
+                incorrectNumber=0;
+                correctNumber=0;
+                incorrectNumber=0;
 
-                        currentNumber=0;
+                for (int j=0;j<questionNumbers;j++){
+                    if(myAnswer.get( j )==0) unansweredNumber++;
+                    else {
+                        if (myAnswer.get( j )==optionsAnswer.get( j )) correctNumber++;
+                        else if (myAnswer.get( j )!=optionsAnswer.get( j )) incorrectNumber++;
+                    }
+                }
+                StudyResultsDialog studyResultsDialog=new
+                        StudyResultsDialog(StudyChallengeActivity.this,correctNumber,incorrectNumber,unansweredNumber,questionNumbers  );
+                studyResultsDialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+                studyResultsDialog.setCanceledOnTouchOutside(false);
+                studyResultsDialog.show();
+                studyResultsDialog.findViewById( R.id. btn_show_answers).setOnClickListener( new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        timerSeek.cancel();
+                        timerShow.cancel();
+                        text_stop_time.setVisibility( View.GONE );
+                        txt_pauseTime_study.setVisibility( View.GONE );
+                        btn_pauseTime.setVisibility( View.GONE );
+                        btn_stop_study.setVisibility( View.GONE );
+                        totalTime_study.setTextSize( 18);
 
+                        totalTime_study.setText( "مشاهده درصدها" );
                         //startAnswer(currentNumber);
-                        warnTimeDialog.dismiss();
-                        StudyResultsDialog studyResultsDialog=new
-                                StudyResultsDialog(StudyChallengeActivity.this,correctNumber,incorrectNumber,unansweredNumber,totalNumber  );
-                        studyResultsDialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
-                        studyResultsDialog.setCanceledOnTouchOutside(false);
-                        studyResultsDialog.show();
-                        studyResultsDialog.findViewById( R.id. btn_show_answers).setOnClickListener( new View.OnClickListener() {
-                            @Override
-                            public void onClick(View v) {
-                                Toast.makeText( StudyChallengeActivity.this,"inChallenge",Toast.LENGTH_SHORT ).show();
-                                challengeState="inAnswer";
-                                currentNumber=0;
-                                text_stop_time.setVisibility( View.GONE );
-                                txt_pauseTime_study.setVisibility( View.GONE );
-
-                                totalTime_study.setVisibility( View.GONE );
-
-                                timerSeek.cancel();
-                                timerShow.cancel();
-
-                                //startAnswer(currentNumber);
-                                studyResultsDialog.dismiss();
-
-                            }
-                        } );
+                        studyResultsDialog.dismiss();
 
                     }
                 } );
+
                 break;
         }
     }
@@ -661,7 +779,7 @@ private void setViewPager(String state){
                         tm[0]--;
                         if (tm[0]==0){
                             //text_start_studyChallenge.setTextColor( getResources().getColor( R.color.colorPointAnim ) );
-                            text_start_studyChallenge.setTextSize( 75 );
+                            text_start_studyChallenge.setTextSize( 50 );
                             text_start_studyChallenge.setText( "شروع چالش" );
 
                             String music= Hawk.get( "music" );
@@ -691,9 +809,13 @@ private void setViewPager(String state){
                             timer( totalTime );
                             text_start_studyChallenge.setVisibility( View.GONE );
                             challengeState="inChallenge";*/
+                            text_start_studyChallenge.setVisibility( View.GONE );
                             constraint_show_number.setVisibility( View.VISIBLE );
+                            recycler_report_study_all.setVisibility( View.VISIBLE );
+                            recycler_report_study_line.setVisibility( View.VISIBLE );
                             constraintLayout_main_study.setVisibility( View.VISIBLE );
                             constraintLayout_header_study.setVisibility( View.VISIBLE );
+                            button_slide.setVisibility( View.VISIBLE );
                             coordinatorLayout.setVisibility( View.VISIBLE );
                             all_question_number.setText( ""+questionNumbers );
                             current_question_number.setText( ""+(currentNumber+1) );
@@ -766,6 +888,192 @@ private void setViewPager(String state){
 
     }
 
+
+    //****************************************************************************************************************//
+    public class ShowLineQuestions extends RecyclerView.Adapter<ShowLineQuestions.LineQuestionsViewHolder>{
+        List<Integer> questionSelectedState=new ArrayList<>(  );
+        int currentNumberQ;
+
+        public ShowLineQuestions(List<Integer> questionSelectedState,int currentNumberQ){
+            this.questionSelectedState=questionSelectedState;
+            this.currentNumberQ=currentNumberQ;
+        }
+        @NonNull
+        @Override
+        public LineQuestionsViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
+            View view= LayoutInflater.from( viewGroup.getContext() )
+                    .inflate( R.layout.report_chance_item,viewGroup,false );
+            StudyChallengeActivity.ShowLineQuestions.LineQuestionsViewHolder holder;
+            holder= new LineQuestionsViewHolder( view );
+            return holder;    }
+
+        @Override
+        public void onBindViewHolder(@NonNull LineQuestionsViewHolder lineQuestionsViewHolder, int i) {
+            lineQuestionsViewHolder. text_number_chance_item
+                    .setTextSize( TypedValue.COMPLEX_UNIT_DIP, 15 );
+            lineQuestionsViewHolder. text_number_chance_item
+                    .setTextColor( getResources().getColor( R.color.colorDarkText ) );
+
+            int num=i+1;
+
+            lineQuestionsViewHolder.text_number_chance_item.setText( ""+num );
+            int state=questionSelectedState.get( i );
+            switch (state){
+                case 0:
+                    lineQuestionsViewHolder.report_chance_back_item
+                            .setBackgroundResource( R.drawable.circle_shape_number_question_gray  );
+
+                    break;
+
+                default:
+                    lineQuestionsViewHolder.report_chance_back_item
+                            .setBackgroundResource( R.drawable.circle_shape_select_question_blue  );
+                    break;
+            }
+            if (currentNumber==i){
+                lineQuestionsViewHolder. text_number_chance_item
+                        .setTextSize( TypedValue.COMPLEX_UNIT_DIP, 28 );
+                lineQuestionsViewHolder. text_number_chance_item
+                        .setTextColor( getResources().getColor( R.color.colorDarkText ) );
+            }
+
+
+
+
+
+        }
+
+        @Override
+        public int getItemCount() {
+           /* int size=0;
+            if(rState.equals( "timeConsuming" )){
+                size=timeConsumingQuestions.size();
+            }else if(rState.equals( "all" )){
+                size=questionNumber;
+            }*/
+            return questionSelectedState.size();
+
+        }
+
+        public class LineQuestionsViewHolder extends RecyclerView.ViewHolder{
+            ConstraintLayout report_chance_back_item;
+            TextView text_number_chance_item;
+            public LineQuestionsViewHolder(@NonNull View itemView) {
+                super( itemView );
+                report_chance_back_item=itemView.findViewById( R.id.report_chance_back_item );
+                text_number_chance_item=itemView.findViewById( R.id.text_number_chance_item );
+
+                report_chance_back_item.setOnClickListener( new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+
+                        currentNumber=getAdapterPosition();
+                        adapterQuestionReycle.notifyDataSetChanged();
+                        adapterQuestionReycleAll.notifyDataSetChanged();
+                        // if (currentNumber>3)recycler_report_study_line.getLayoutManager().scrollToPosition(currentNumber-3);
+                        // recycler_report_study_line.getLayoutManager().scrollToPosition(currentNumber+3);
+                        if(currentNumber>=3) horizontalLayoutManagaer.scrollToPositionWithOffset(currentNumber-3, currentNumber);
+                       else horizontalLayoutManagaer.scrollToPositionWithOffset(0,5);
+                        view_Study_question.setCurrentItem( currentNumber );
+
+
+
+
+                    }
+                } );
+            }
+        }
+    }
+//******************************************************************************************************//
+//******************************************************************************************************//
+public class AnswerQuestionReport extends RecyclerView.Adapter<AnswerQuestionReport.MyAnswerQuestionReport>{
+    List<Integer> questionSelectedState=new ArrayList<>(  );
+    List<Integer> answerQuestions=new ArrayList<>(  );
+
+
+    public AnswerQuestionReport(List<Integer> answerQuestions,List<Integer> questionSelectedState){
+        this.questionSelectedState=questionSelectedState;
+        this.answerQuestions=answerQuestions;
+    }
+
+    @NonNull
+    @Override
+    public MyAnswerQuestionReport onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
+        View view= LayoutInflater.from( viewGroup.getContext() )
+                .inflate( R.layout.report_chance_item,viewGroup,false );
+        MyAnswerQuestionReport holder;
+        holder= new MyAnswerQuestionReport( view );
+        return holder;
+    }
+
+    @Override
+    public void onBindViewHolder(@NonNull MyAnswerQuestionReport myAnswerQuestionReport, int i) {
+        int num=i+1;
+        myAnswerQuestionReport.text_number_chance_item
+                .setTextSize( TypedValue.COMPLEX_UNIT_DIP, 15 );
+        myAnswerQuestionReport.text_number_chance_item
+                .setTextColor( getResources().getColor( R.color.colorDarkText ) );
+        myAnswerQuestionReport.text_number_chance_item.setText( ""+num );
+        int state=questionSelectedState.get( i );
+        switch (state){
+            case 0:
+                myAnswerQuestionReport.report_chance_back_item
+                        .setBackgroundResource( R.drawable.circle_shape_number_question_gray  );
+
+                break;
+            default:
+                if(answerQuestions.get( i )== questionSelectedState.get( i )){
+                    myAnswerQuestionReport.report_chance_back_item
+                            .setBackgroundResource( R.drawable.circle_shape_number_question_green );
+                }
+                else {
+                    myAnswerQuestionReport.report_chance_back_item
+                            .setBackgroundResource( R.drawable.circle_shape_number_question_red );
+                }
+
+
+                break;
+        }
+        if (currentNumber==i){
+            myAnswerQuestionReport.text_number_chance_item
+                    .setTextSize( TypedValue.COMPLEX_UNIT_DIP, 28 );
+            myAnswerQuestionReport.text_number_chance_item
+                    .setTextColor( getResources().getColor( R.color.colorWetasphalt ) );
+        }
+
+
+    }
+
+    @Override
+    public int getItemCount() {
+        return answerQuestions.size();
+    }
+
+
+    public class MyAnswerQuestionReport extends RecyclerView.ViewHolder{
+        ConstraintLayout report_chance_back_item;
+        TextView text_number_chance_item;
+        public MyAnswerQuestionReport(@NonNull View itemView) {
+            super( itemView );
+            report_chance_back_item=itemView.findViewById( R.id.report_chance_back_item );
+            text_number_chance_item=itemView.findViewById( R.id.text_number_chance_item );
+            report_chance_back_item.setOnClickListener( new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    currentNumber=getAdapterPosition();
+                    adapterAnswer.notifyDataSetChanged();
+                    adapterAnswerAll.notifyDataSetChanged();
+                    if(currentNumber>=3) horizontalLayoutManagaer.scrollToPositionWithOffset(currentNumber-3, currentNumber);
+                    else horizontalLayoutManagaer.scrollToPositionWithOffset(0, 5);
+                    view_Study_answer.setCurrentItem( currentNumber );
+
+                }
+            } );
+
+        }
+    }
+}
+
 //********************************************************************************************************
     private void findOptions() {
         recycler_report_study_line = findViewById(R.id.recycler_report_study_line);
@@ -781,6 +1089,7 @@ private void setViewPager(String state){
         txt_pauseTime_study=findViewById( R.id.txt_pauseTime_study );
         btn_pauseTime=findViewById( R.id.btn_pauseTime );
         btn_stop_study=findViewById( R.id.btn_stop_study );
+        button_slide=findViewById( R.id.button_slide );
 
         constraintLayout_timer=findViewById( R.id.constraintLayout_timer );
         progressBar_timer=findViewById( R.id.progressBar_timer );
@@ -788,6 +1097,9 @@ private void setViewPager(String state){
         constraintLayout_main_study=findViewById( R.id.constraintLayout_main_study );
         constraintLayout_header_study=findViewById( R.id.constraintLayout_header_study );
         coordinatorLayout=findViewById( R.id.coordinatorLayout );
+        button_slide=findViewById( R.id.button_slide );
+        linear_answer_guide=findViewById( R.id.linear_answer_guide );
+        linear_question_guide=findViewById( R.id.linear_question_guide );
 
         text_start_studyChallenge=findViewById( R.id.text_start_studyChallenge );
         text_question_study=findViewById( R.id.text_question_study );
@@ -797,6 +1109,50 @@ private void setViewPager(String state){
         totalTime_study = findViewById(R.id.totalTime_study);
     }
 
+    @Override
+    protected void onStart() {
+        super.onStart();
+        String sound= Hawk.get( "sound" );
+        if (sound.equals( "on" )) {
+            clickSound=true;
 
+        }
+        String music= Hawk.get( "music" );
+        if (music.equals( "on" )) {
+            StudyChallengeActivity.this.stopService(new Intent( StudyChallengeActivity.this, MainMusicService.class));
+        }
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        String music= Hawk.get( "music" );
+        if (music.equals( "on" )) {
+            StudyChallengeActivity.this.stopService(new Intent( StudyChallengeActivity.this, SoundService.class));
+
+
+        }
+    }
+
+    @Override
+    public void onBackPressed() {
+        if(slideIsOpen){
+            bottomSheetBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
+            slideIsOpen=false;
+            button_slide.setImageResource(R.drawable.up);
+
+        }
+       else{
+            WarningExiteMachDialog dialog=new WarningExiteMachDialog( StudyChallengeActivity.this );
+            dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+            dialog.show();
+            dialog.setCanceledOnTouchOutside(false);
+        }
+
+    }
+    @Override
+    protected void attachBaseContext(Context newBase) {
+        super.attachBaseContext( CalligraphyContextWrapper.wrap(newBase));
+    }
 }
 

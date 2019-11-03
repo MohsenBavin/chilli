@@ -9,8 +9,12 @@
 <android.support.constraint.ConstraintLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:id="@+id/constraint_my"
-    android:background="#3A0149">
+    android:id="@+id/constraint_my">
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:src="@drawable/back_vs_one"
+        android:scaleType="fitXY"/>
 
     <ProgressBar
         android:id="@+id/progress_my_persent"

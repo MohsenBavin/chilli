@@ -74,7 +74,7 @@ constraintLayoutLogin.setOnClickListener( new View.OnClickListener() {
                 userIsOk=true;
                 }
                 if (passIsOk==true && userIsOk==true){
-                    buttonLogin.setBackground( getResources().getDrawable(R.drawable.active_buttonshape ) );
+                    buttonLogin.setBackground( getResources().getDrawable(R.drawable.button_green_shape ) );
                 }
                 else {buttonLogin.setBackground( getResources().getDrawable(R.drawable.edit_text_shape) );}
 
@@ -105,7 +105,7 @@ constraintLayoutLogin.setOnClickListener( new View.OnClickListener() {
                 }
 
                 if (passIsOk==true && userIsOk==true){
-                    buttonLogin.setBackground( getResources().getDrawable(R.drawable.active_buttonshape ) );
+                    buttonLogin.setBackground( getResources().getDrawable(R.drawable.button_green_shape ) );
                 }
                 else {buttonLogin.setBackground( getResources().getDrawable(R.drawable.edit_text_shape) ); }
 

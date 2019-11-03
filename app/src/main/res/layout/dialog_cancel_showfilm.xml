@@ -50,7 +50,7 @@
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
-        android:background="@drawable/red_button_shaape"
+        android:background="@drawable/button_red_shape"
         android:clickable="true"
         android:text="بله"
         android:textStyle="bold"

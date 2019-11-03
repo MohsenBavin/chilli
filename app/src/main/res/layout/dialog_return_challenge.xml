@@ -70,7 +70,7 @@
         android:layout_height="50dp"
         android:layout_gravity="center"
         android:layout_marginBottom="20dp"
-        android:background="@drawable/active_buttonshape"
+        android:background="@drawable/button_green_click_state"
         android:clickable="true"
         android:text="ادامه آزمون"
         android:textColor="@color/colorWhite"

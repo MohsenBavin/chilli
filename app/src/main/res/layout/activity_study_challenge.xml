@@ -7,19 +7,31 @@
     android:background="@drawable/challenge_back"
     tools:context=".StudyChallengeActivity">
 
-    <include android:id="@+id/include"
-        layout="@layout/content_main_study" />
+    <include layout="@layout/content_main_study" />
+
     <include
         android:id="@+id/bottom_sheet"
         layout="@layout/bottomsheet_main_study" />
+    <View
+        android:id="@+id/view_slide"
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:background="#4527A0"
+        app:layout_anchor="@id/bottom_sheet"
+        app:layout_anchorGravity="top|right|end" />
+    <View
+        android:layout_width="15dp"
+        android:layout_height="2dp"
+        android:background="#0091EA"
+        app:layout_anchor="@id/bottom_sheet"
+        app:layout_anchorGravity="top|center"/>
 
     <ImageView
         android:id="@+id/button_slide"
-        android:layout_width="match_parent"
-        android:layout_height="15dp"
-        android:background="#42A8E6"
-        android:src="@drawable/drag"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:src="@drawable/down"
         app:layout_anchor="@id/bottom_sheet"
-        app:layout_anchorGravity="top|right|end" />
+        app:layout_anchorGravity="top|center" />
 
 </android.support.design.widget.CoordinatorLayout>

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shape xmlns:android="http://schemas.android.com/apk/res/android">
+    <stroke android:width="0dp"
+        android:color="#ffffff"/>
+    <solid android:color="@color/colorNephritis"/>
+
+    <gradient
+        android:startColor="#A81D1D"
+        android:centerColor="#A81D1D"
+        android:endColor="#A81D1D"/>
+
+    <corners android:radius="30dp"/>
+</shape>

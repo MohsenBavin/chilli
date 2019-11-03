@@ -1,29 +1,20 @@
 package com.bavin.mohsen.backnardeban.starterActivities;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Bundle;
 import android.support.constraint.ConstraintLayout;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Toast;
 
-import com.bavin.mohsen.backnardeban.Classes.RetrofitClasses.APIRetro;
-import com.bavin.mohsen.backnardeban.Classes.RetrofitClasses.ApiIntarfaceRetro;
-import com.bavin.mohsen.backnardeban.Classes.RetrofitClasses.GetLoginDataRetro;
-import com.bavin.mohsen.backnardeban.Classes.RetrofitClasses.GetLoginPhoneRetro;
-import com.bavin.mohsen.backnardeban.Classes.RetrofitClasses.GetPhoneStateRetro;
 import com.bavin.mohsen.backnardeban.R;
 import com.orhanobut.hawk.Hawk;
-
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 public class SignUpTelephone extends AppCompatActivity {
     ConstraintLayout constraintLayoutPhone;
@@ -32,6 +23,7 @@ public class SignUpTelephone extends AppCompatActivity {
     private boolean phoneIsOk;
     private String phone;
 
+    @SuppressLint("ClickableViewAccessibility")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate( savedInstanceState );
@@ -39,13 +31,11 @@ public class SignUpTelephone extends AppCompatActivity {
         getWindow().setWindowAnimations(0);
         Hawk.init(this).build();
 
-
         constraintLayoutPhone=findViewById( R.id.constraint_SignUpTelephone );
         getphone=findViewById( R.id.edt_get_telephone );
         nextPhone=findViewById( R.id.buttonNextforphone );
 
-        getphone.setCompoundDrawablesWithIntrinsicBounds(getResources().getDrawable(R.drawable.phone_call)
-                , null,null, null);
+       // getphone.setCompoundDrawablesWithIntrinsicBounds(getResources().getDrawable(R.drawable.phone_call), null,null, null);
 
         constraintLayoutPhone.setOnClickListener( new View.OnClickListener() {
             @Override
@@ -56,6 +46,7 @@ public class SignUpTelephone extends AppCompatActivity {
 
             }
         } );
+
 
         getphone.addTextChangedListener( new TextWatcher() {
             @Override
@@ -77,9 +68,9 @@ public class SignUpTelephone extends AppCompatActivity {
                 }
 
                 if ( phoneIsOk==true){
-                    nextPhone.setBackground( getResources().getDrawable(R.drawable.active_buttonshape ) );
+                    nextPhone.setBackground( getResources().getDrawable(R.drawable.button_green_click_state ) );
                 }
-                else {nextPhone.setBackground( getResources().getDrawable(R.drawable.inactive_button_shape) );}
+                else {nextPhone.setBackground( getResources().getDrawable(R.drawable.button_inactive_shape ) );}
 
 
             }

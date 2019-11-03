@@ -4,15 +4,14 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.Color;
-import android.graphics.PorterDuff;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
-
-import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -43,17 +42,23 @@ public class SplashActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate( savedInstanceState );
+        requestWindowFeature( Window.FEATURE_NO_TITLE);
+        this.getWindow().setFlags( WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
+
         setContentView( R.layout.activity_splash );
+
+
+
         Hawk.init(this).build();
 
-
+       // getSupportActionBar().hide();
         txtProgress = (TextView) findViewById(R.id.txtProgress);
         progressBar_chilli =  findViewById(R.id.progressBar_chilli);
         progressBar_fire = findViewById(R.id.progressBar_fire);
         // Adding colors on progress bar
 //       ProgressBar.getProgressDrawable().setColorFilter( Color.CYAN, PorterDuff.Mode.SRC_IN);
 
-        checkConnection();
+        checkConnection("first");
 
     }
 
@@ -71,7 +76,7 @@ public class SplashActivity extends AppCompatActivity {
                 .setPositiveButton("امتحان دوباره", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
-                        checkConnection();
+                        checkConnection("first");
                     }
                 })
 
@@ -186,13 +191,15 @@ public class SplashActivity extends AppCompatActivity {
                             runOnUiThread( new Runnable() {
                                 @Override
                                 public void run() {
+                                    if (pStatus >= 100) {
+                                        timerSp.cancel();
+                                        fillfire("getUserData");
+
+                                    }
                                     pStatus += 1;
                                     progressBar_chilli.setProgress( pStatus );
                                     txtProgress.setText( pStatus + " %" );
-                                    if (pStatus == 100) {
-                                        timerSp.cancel();
-                                        fillfire();
-                                    }
+
 
                                 }
                             } );
@@ -214,11 +221,12 @@ public class SplashActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<GetLoginDataRetro> call, Throwable t) {
+                checkConnection( "getUserData" );
 
             }
         } );
     }
-    private void fillfire(){
+    private void fillfire(String statefire){
 
         pStatus=0;
         timerSp=new Timer(  );
@@ -237,10 +245,21 @@ public class SplashActivity extends AppCompatActivity {
                                 @Override
                                 public void run() {
                                     timerSp.cancel();
-                                    Intent intent = new Intent( SplashActivity.this, MainActivity.class );
-                                    intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                                    startActivity( intent );
-                                    finish();
+
+
+                                    if(statefire.equals( "goRegisterUser" )){
+                                        Hawk.put( "avatarId", "http://moonishop.ir/nardeban/images/chilli.png");
+                                        Intent intent2 = new Intent( SplashActivity.this, SignUpTelephone.class );
+                                        intent2.setFlags( Intent.FLAG_ACTIVITY_CLEAR_TOP );
+                                        startActivity( intent2 );
+                                        finish();
+                                    }
+                                    else if(statefire.equals( "getUserData" )){
+                                        Intent intent = new Intent( SplashActivity.this, MainActivity.class );
+                                        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                                        startActivity( intent );
+                                        finish();
+                                    }
 
                                 }
                             } , 800 ) ;
@@ -266,19 +285,16 @@ public class SplashActivity extends AppCompatActivity {
                 runOnUiThread( new Runnable() {
                     @Override
                     public void run() {
+                        if (pStatus >= 100) {
+
+                            timerSp.cancel();
+                            fillfire("goRegisterUser");
+
+                        }
+
                         pStatus += 1;
                         progressBar_chilli.setProgress( pStatus );
                         txtProgress.setText( pStatus + " %" );
-                        if (pStatus == 100) {
-                            timerSp.cancel();
-                            Hawk.put( "avatarId", "http://moonishop.ir/nardeban/images/graduates.png");
-                            Intent intent = new Intent( SplashActivity.this, SignUpTelephone.class );
-                            intent.setFlags( Intent.FLAG_ACTIVITY_CLEAR_TOP );
-                            startActivity( intent );
-                            finish();
-
-
-                        }
 
                     }
                 } );
@@ -290,7 +306,7 @@ public class SplashActivity extends AppCompatActivity {
 
 //******************* checkConnectioncheckConnection method ****************************************
 
-    private void checkConnection(){
+    private void checkConnection(String state){
         boolean connected = false;
         pStatus=0;
         timerSp=new Timer(  );
@@ -310,7 +326,9 @@ public class SplashActivity extends AppCompatActivity {
                             ConnectivityManager connectivityManager = (ConnectivityManager)getSystemService( Context.CONNECTIVITY_SERVICE);
                             if(connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_MOBILE).getState() == NetworkInfo.State.CONNECTED ||
                                     connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_WIFI).getState() == NetworkInfo.State.CONNECTED) {
-                                yesConnected();
+                                if (state.equals( "first" )) yesConnected();
+                                else if (state.equals( "getUserData" )) getUserData();
+
                             }
                             else{
 
